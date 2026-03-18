@@ -12,8 +12,6 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private TimerUI _timerUI;
     [SerializeField] private List<VehicleConfig> _vehicleConfigs;
     [SerializeField] private CrossRoadsPrioritization _crossRoadsPrioritization;
-    [SerializeField] private SpawnPointConfig[] _spawnPoints;
-    [SerializeField] private ExitPointConfig[] _exitPoints;
     [SerializeField] private CrossRoadsConfig[] _crossRoads;
     [SerializeField] private RoadSegmentConfig[] _roadSegments;
     
@@ -57,22 +55,8 @@ public class RoundManager : MonoBehaviour
             roadSegmentsData.Add(roadSegmentConfig.GetRoadSegmentData());
         }
         
-        var exitPointsData = new List<ExitPointData>();
-        foreach (var exitPointConfig in _exitPoints)
-        {
-            exitPointsData.Add(exitPointConfig.GetExitPointData());
-        }
-        
-        var spawnPointsData = new List<SpawnPointData>();
-        foreach (var spawnPointConfig in _spawnPoints)
-        {
-            spawnPointsData.Add(spawnPointConfig.GetSpawnPointData());
-        }
-        
         var networkLayoutData = new NetworkLayoutData
         {
-            SpawnPoints = spawnPointsData,
-            ExitPoints = exitPointsData,
             CrossRoads = crossRoadsData,
             RoadSegments = roadSegmentsData,
         };

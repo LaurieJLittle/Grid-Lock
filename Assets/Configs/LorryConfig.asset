@@ -18,4 +18,4 @@ MonoBehaviour:
   _rightTurnTraversalTime: 2
   _straightTraversalTime: 1.5
   _speed: 2
-  _sprite: {fileID: 21300000, guid: aec91f9f0c264a34b87efb44aa84f390, type: 3}
+  _sprite: {fileID: 21300000, guid: c3175ef48e96549649bb4f03fb4d1edc, type: 3}

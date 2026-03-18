@@ -37,6 +37,16 @@ public class RoadNetwork
             var segment = new RoadSegment(data.Id, data.Capacity, data.Direction);
             _segments[data.Id] = segment;
 
+            if (data.IsSpawnPoint)
+            {
+                _spawnSegments.Add(segment);
+            }
+
+            if (data.IsExitPoint)
+            {
+                _exitSegments.Add(segment);
+            }
+
             if (_crossRoads.TryGetValue(data.FromCrossRoadsId, out var fromCrossRoads))
             {
                 segment.FromCrossRoads = fromCrossRoads;
@@ -48,19 +58,6 @@ public class RoadNetwork
                 segment.ToCrossRoads = toCrossRoads;
                 toCrossRoads.InboundRoads[data.Direction] = segment;
             }
-        }
-
-        // Register spawn and exit points
-        foreach (var spawn in networkLayoutData.SpawnPoints)
-        {
-            if (_segments.TryGetValue(spawn.RoadSegmentId, out var seg))
-                _spawnSegments.Add(seg);
-        }
-
-        foreach (var exit in networkLayoutData.ExitPoints)
-        {
-            if (_segments.TryGetValue(exit.RoadSegmentId, out var seg))
-                _exitSegments.Add(seg);
         }
     }
 
@@ -75,6 +72,4 @@ public class NetworkLayoutData
 {
     public List<CrossRoadsData> CrossRoads = new List<CrossRoadsData>();
     public List<RoadSegmentData> RoadSegments = new List<RoadSegmentData>();
-    public List<SpawnPointData> SpawnPoints = new List<SpawnPointData>();
-    public List<ExitPointData> ExitPoints = new List<ExitPointData>();
 }

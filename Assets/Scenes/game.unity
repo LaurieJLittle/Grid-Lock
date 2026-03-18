@@ -801,6 +801,10 @@ PrefabInstance:
       value: Bottom-Left NorthBound
       objectReference: {fileID: 0}
     - target: {fileID: 1998007339292183336, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
+      propertyPath: _isSpawnPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998007339292183336, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
       propertyPath: ToCrossRoadsId
       value: SW
       objectReference: {fileID: 0}
@@ -878,10 +882,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6083660639128857117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1019979554}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6445558154851320117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2039696117}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
 --- !u!4 &527404213 stripped
 Transform:
@@ -955,6 +956,10 @@ PrefabInstance:
       value: Top-Left EastBound
       objectReference: {fileID: 0}
     - target: {fileID: 8650808772689258579, guid: 755336abb384d7643a5825818c6ef140, type: 3}
+      propertyPath: _isSpawnPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650808772689258579, guid: 755336abb384d7643a5825818c6ef140, type: 3}
       propertyPath: ToCrossRoadsId
       value: NW
       objectReference: {fileID: 0}
@@ -1008,34 +1013,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1416172326003619585, guid: 755336abb384d7643a5825818c6ef140, type: 3}
       insertIndex: -1
       addedObject: {fileID: 216333184}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4426063103275305343, guid: 755336abb384d7643a5825818c6ef140, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 580674003}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 755336abb384d7643a5825818c6ef140, type: 3}
 --- !u!4 &580674001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8669837898230191855, guid: 755336abb384d7643a5825818c6ef140, type: 3}
   m_PrefabInstance: {fileID: 580674000}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &580674002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4426063103275305343, guid: 755336abb384d7643a5825818c6ef140, type: 3}
-  m_PrefabInstance: {fileID: 580674000}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &580674003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 580674002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfaade6f70452045a92f1b9d9d41227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Top-Left EastBound
 --- !u!4 &580674004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1416172326003619585, guid: 755336abb384d7643a5825818c6ef140, type: 3}
@@ -1046,7 +1030,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1382043014940004341, guid: 755336abb384d7643a5825818c6ef140, type: 3}
   m_PrefabInstance: {fileID: 580674000}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 580674002}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -1057,7 +1041,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8650808772689258579, guid: 755336abb384d7643a5825818c6ef140, type: 3}
   m_PrefabInstance: {fileID: 580674000}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 580674002}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -1074,24 +1058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647b453e7a1b837409fdc1e552acea0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &717882250 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4426063103275305343, guid: 755336abb384d7643a5825818c6ef140, type: 3}
-  m_PrefabInstance: {fileID: 2128843769}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &717882254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717882250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfaade6f70452045a92f1b9d9d41227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Bottom-Left EastBound
 --- !u!4 &717882255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1416172326003619585, guid: 755336abb384d7643a5825818c6ef140, type: 3}
@@ -1102,7 +1068,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1382043014940004341, guid: 755336abb384d7643a5825818c6ef140, type: 3}
   m_PrefabInstance: {fileID: 2128843769}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717882250}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -1113,7 +1079,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8650808772689258579, guid: 755336abb384d7643a5825818c6ef140, type: 3}
   m_PrefabInstance: {fileID: 2128843769}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717882250}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -1742,6 +1708,10 @@ PrefabInstance:
       value: Bottom-Right EastBound
       objectReference: {fileID: 0}
     - target: {fileID: 5826553293917167374, guid: 838bc99e28d87c649942430567abffe3, type: 3}
+      propertyPath: _isExitPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826553293917167374, guid: 838bc99e28d87c649942430567abffe3, type: 3}
       propertyPath: FromCrossRoadsId
       value: SE
       objectReference: {fileID: 0}
@@ -1804,40 +1774,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1566482007953341986, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 963635613}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838bc99e28d87c649942430567abffe3, type: 3}
 --- !u!4 &963635611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 326899738719137410, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 963635610}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &963635612 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1566482007953341986, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-  m_PrefabInstance: {fileID: 963635610}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &963635613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963635612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9467ff5fed8b340ac94f9d7c45805b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Bottom-Right EastBound
 --- !u!114 &963635615 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4323397555643119784, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 963635610}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963635612}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -1848,7 +1797,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5826553293917167374, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 963635610}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963635612}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -2005,30 +1954,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 980029620}
---- !u!1 &988485245 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1751479692661956231, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-  m_PrefabInstance: {fileID: 2017232300}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &988485249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988485245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9467ff5fed8b340ac94f9d7c45805b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Top-Right NorthBound
 --- !u!114 &988485251 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1639846353217137835, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 2017232300}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988485245}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -2039,7 +1970,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6523429335473738906, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 2017232300}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988485245}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -2525,24 +2456,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129562289}
   m_CullTransparentMesh: 1
---- !u!1 &1310390193 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6445558154851320117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
-  m_PrefabInstance: {fileID: 2115963081}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1310390197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310390193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfaade6f70452045a92f1b9d9d41227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Bottom-Right NorthBound
 --- !u!4 &1310390198 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6083660639128857117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
@@ -2553,7 +2466,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6340046744190858009, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
   m_PrefabInstance: {fileID: 2115963081}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310390193}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -2564,7 +2477,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1998007339292183336, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
   m_PrefabInstance: {fileID: 2115963081}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310390193}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -2623,16 +2536,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c214e8758b83154f814bfec08e28cc7, type: 2}
   - {fileID: 11400000, guid: 4bf4a36e27c39ad46a0ed366f43df39c, type: 2}
   _crossRoadsPrioritization: 0
-  _spawnPoints:
-  - {fileID: 717882254}
-  - {fileID: 580674003}
-  - {fileID: 2039696117}
-  - {fileID: 1310390197}
-  _exitPoints:
-  - {fileID: 963635613}
-  - {fileID: 2017232307}
-  - {fileID: 1780612679}
-  - {fileID: 988485249}
   _crossRoads:
   - {fileID: 2014681335}
   - {fileID: 340960257}
@@ -2909,6 +2812,10 @@ PrefabInstance:
       value: Top-Left NorthBound
       objectReference: {fileID: 0}
     - target: {fileID: 6523429335473738906, guid: 838bc99e28d87c649942430567abffe3, type: 3}
+      propertyPath: _isExitPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523429335473738906, guid: 838bc99e28d87c649942430567abffe3, type: 3}
       propertyPath: FromCrossRoadsId
       value: NW
       objectReference: {fileID: 0}
@@ -2931,10 +2838,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1751479692661956231, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1780612679}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838bc99e28d87c649942430567abffe3, type: 3}
 --- !u!4 &1510393904 stripped
 Transform:
@@ -3073,30 +2977,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1780612675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1751479692661956231, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-  m_PrefabInstance: {fileID: 1510393903}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1780612679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780612675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9467ff5fed8b340ac94f9d7c45805b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Top-Left NorthBound
 --- !u!114 &1780612681 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1639846353217137835, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 1510393903}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780612675}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -3107,7 +2993,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6523429335473738906, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 1510393903}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780612675}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -3413,6 +3299,10 @@ PrefabInstance:
       value: Top-Right EastBound
       objectReference: {fileID: 0}
     - target: {fileID: 5826553293917167374, guid: 838bc99e28d87c649942430567abffe3, type: 3}
+      propertyPath: _isExitPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5826553293917167374, guid: 838bc99e28d87c649942430567abffe3, type: 3}
       propertyPath: FromCrossRoadsId
       value: NE
       objectReference: {fileID: 0}
@@ -3445,6 +3335,10 @@ PrefabInstance:
       value: Top-Right NorthBound
       objectReference: {fileID: 0}
     - target: {fileID: 6523429335473738906, guid: 838bc99e28d87c649942430567abffe3, type: 3}
+      propertyPath: _isExitPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523429335473738906, guid: 838bc99e28d87c649942430567abffe3, type: 3}
       propertyPath: FromCrossRoadsId
       value: NE
       objectReference: {fileID: 0}
@@ -3467,43 +3361,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1751479692661956231, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 988485249}
-    - targetCorrespondingSourceObject: {fileID: 1566482007953341986, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2017232307}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838bc99e28d87c649942430567abffe3, type: 3}
 --- !u!4 &2017232301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 326899738719137410, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 2017232300}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2017232302 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1566482007953341986, guid: 838bc99e28d87c649942430567abffe3, type: 3}
-  m_PrefabInstance: {fileID: 2017232300}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2017232307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017232302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9467ff5fed8b340ac94f9d7c45805b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Top-Right EastBound
 --- !u!114 &2017232309 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4323397555643119784, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 2017232300}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017232302}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -3514,7 +3384,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5826553293917167374, guid: 838bc99e28d87c649942430567abffe3, type: 3}
   m_PrefabInstance: {fileID: 2017232300}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017232302}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -3542,24 +3412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2039696113 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6445558154851320117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
-  m_PrefabInstance: {fileID: 527404212}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2039696117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039696113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfaade6f70452045a92f1b9d9d41227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roadSegmentId: Bottom-Left NorthBound
 --- !u!4 &2039696118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6083660639128857117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
@@ -3570,7 +3422,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6340046744190858009, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
   m_PrefabInstance: {fileID: 527404212}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039696113}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f30a5bc0a7b4fb347a19a26048743b7e, type: 3}
@@ -3581,7 +3433,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1998007339292183336, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
   m_PrefabInstance: {fileID: 527404212}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039696113}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
@@ -3686,6 +3538,10 @@ PrefabInstance:
       value: Bottom-Right NorthBound
       objectReference: {fileID: 0}
     - target: {fileID: 1998007339292183336, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
+      propertyPath: _isSpawnPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998007339292183336, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
       propertyPath: ToCrossRoadsId
       value: SE
       objectReference: {fileID: 0}
@@ -3767,10 +3623,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6083660639128857117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1407828659}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6445558154851320117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1310390197}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
 --- !u!4 &2115963082 stripped
 Transform:
@@ -3816,6 +3669,10 @@ PrefabInstance:
     - target: {fileID: 8650808772689258579, guid: 755336abb384d7643a5825818c6ef140, type: 3}
       propertyPath: _id
       value: Bottom-Left EastBound
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650808772689258579, guid: 755336abb384d7643a5825818c6ef140, type: 3}
+      propertyPath: _isSpawnPoint
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8650808772689258579, guid: 755336abb384d7643a5825818c6ef140, type: 3}
       propertyPath: ToCrossRoadsId
@@ -3871,10 +3728,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1416172326003619585, guid: 755336abb384d7643a5825818c6ef140, type: 3}
       insertIndex: -1
       addedObject: {fileID: 394499734}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4426063103275305343, guid: 755336abb384d7643a5825818c6ef140, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 717882254}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 755336abb384d7643a5825818c6ef140, type: 3}
 --- !u!4 &2128843770 stripped
 Transform:
