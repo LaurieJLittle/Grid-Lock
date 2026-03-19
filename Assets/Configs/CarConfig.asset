@@ -18,4 +18,24 @@ MonoBehaviour:
   _rightTurnTraversalTime: 2
   _straightTraversalTime: 1.5
   _speed: 2
-  _sprite: {fileID: 21300000, guid: e964dcf7e7c8e43c5864020c5100e966, type: 3}
+  _rotationSprites:
+  - {fileID: 21300000, guid: 830088fb9a079fb48bdd4946204b2f3b, type: 3}
+  - {fileID: 21300000, guid: 830088fb9a079fb48bdd4946204b2f3b, type: 3}
+  - {fileID: 21300000, guid: 560e010e32ba58d4a9582bfb0a79d54e, type: 3}
+  - {fileID: 21300000, guid: 4e43eb817f4cc43419427fe723914515, type: 3}
+  - {fileID: 21300000, guid: 5dead39a4cc3cb14eb910d8891c7af26, type: 3}
+  - {fileID: 21300000, guid: 1919136d1fefcc6458bc4d85597df9c9, type: 3}
+  - {fileID: 21300000, guid: 1226a42026019824eb4b104d2f52a3a9, type: 3}
+  - {fileID: 21300000, guid: 741ad05113571d040878c3aaece32c2e, type: 3}
+  - {fileID: 21300000, guid: e8c7ae9e81549b94380a978e7580d77b, type: 3}
+  - {fileID: 21300000, guid: 9ff7ebde9a411ff4ca42ce6abb65b0e3, type: 3}
+  - {fileID: 21300000, guid: 57799f38bb8fe24499a61292d547cae0, type: 3}
+  - {fileID: 21300000, guid: e440a5a175e9fb049928b9606c2cf981, type: 3}
+  - {fileID: 21300000, guid: b8566cee2cf560241a9c380ae731a703, type: 3}
+  - {fileID: 21300000, guid: 401ed4410d0dbf041ad044cace4371c9, type: 3}
+  - {fileID: 21300000, guid: 6b07283072167af4ba9b9bcff64163e3, type: 3}
+  - {fileID: 21300000, guid: 97b6c39184bf6db4493bbf324674d6bf, type: 3}
+  - {fileID: 21300000, guid: d65deda4c88fdd94381e04150a30578f, type: 3}
+  - {fileID: 21300000, guid: 185a39c57279ee542a910a9d7c305f39, type: 3}
+  - {fileID: 21300000, guid: d7f3635f9d617e643953e36fcea22031, type: 3}
+  - {fileID: 21300000, guid: c3e0e63da7b2926448aebadec2b1241c, type: 3}
