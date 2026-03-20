@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class VehicleView : MonoBehaviour
 {
@@ -19,7 +17,10 @@ public class VehicleView : MonoBehaviour
 
     private float _targetAngle;
     private float _currentAngle;
-    private readonly float _turnSpeed = 240f;
+    private readonly float _turnSpeed = 240f; // LL - TODO consider whether this is still nessecary now we have Bezier curves
+
+    private Vector3 _bezierMidPoint;
+    private bool _hasBezierPath;
 
     public void SetData(Vehicle targetVehicle, RoadNetworkView roadNetworkView)
     {
@@ -44,8 +45,11 @@ public class VehicleView : MonoBehaviour
     {
         if (TryGetCurrentPathData(out Vector3 startPosition, out Vector3 endPosition, out float progress))
         {
-            var dir = endPosition - startPosition;
-            _targetAngle = DirectionToAngle(dir);
+            if (!_hasBezierPath) // the case where we do have a bezier is handled in update because we need to update every frame
+            {
+                var dir = endPosition - startPosition;
+                _targetAngle = DirectionToAngle(dir);
+            }
         }
 
         if (vehicleState == VehicleState.Queued)
@@ -77,7 +81,16 @@ public class VehicleView : MonoBehaviour
         {
             if (TryGetCurrentPathData(out Vector3 startPosition, out Vector3 endPosition, out float progress))
             {
-                transform.position = Vector3.Lerp(startPosition, endPosition, progress);
+                if (_hasBezierPath)
+                {
+                    transform.position = MathUtility.QuadraticBezier(startPosition, _bezierMidPoint, endPosition, progress);
+                    Vector3 tangent = MathUtility.QuadraticBezierTangent(startPosition, _bezierMidPoint, endPosition, progress);
+                    _targetAngle = DirectionToAngle(tangent);
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(startPosition, endPosition, progress);
+                }
                 _currentAngle = Mathf.MoveTowardsAngle(_currentAngle, _targetAngle, _turnSpeed * Time.deltaTime);
                 UpdateSpriteFromAngle();
             }
@@ -98,15 +111,15 @@ public class VehicleView : MonoBehaviour
         if (angle <= 180f)
         {
             spriteAngle = angle;
-            flip = false;
+            flip = true;
         }
         else
         {
             spriteAngle = 360f - angle;
-            flip = true;
+            flip = false;
         }
 
-        int index = Mathf.Clamp(Mathf.RoundToInt(spriteAngle / 10f), 0, _rotationSprites.Length - 1);
+        int index = Mathf.Clamp(Mathf.RoundToInt( (180 - spriteAngle) / 10f), 0, _rotationSprites.Length - 1);
         _spriteRenderer.sprite = _rotationSprites[index];
         _spriteRenderer.flipX = flip;
 
@@ -129,20 +142,24 @@ public class VehicleView : MonoBehaviour
         {
             _roadNetworkView.GetSegmentStartEnd(_vehicle.CurrentSegment, out startPosition, out endPosition);
             progress = _vehicle.SegmentProgress;
+            _hasBezierPath = false;
             return true;
         }
         else if (_vehicle.TraversingCrossRoads != null)
         {
-            _roadNetworkView.GetCrossRoadsStartEnd(_vehicle, _vehicle.TraversingCrossRoads, out startPosition, out endPosition);
+            _roadNetworkView.GetCrossRoadsPathData(_vehicle, _vehicle.TraversingCrossRoads, out startPosition, out _bezierMidPoint, out endPosition);
             progress = (_vehicle.FullTraversalTime - _vehicle.CrossroadsTraversalTimeLeft) / _vehicle.FullTraversalTime;
+            _hasBezierPath = _vehicle.GetNextStep().Turn != TurnDirection.Straight;
             return true;
         }
 
         startPosition = new Vector3();
         endPosition = new Vector3();
         progress = 0;
+        _hasBezierPath = false;
         return false;
     }
+
 
     private void OnTripComplete()
     {

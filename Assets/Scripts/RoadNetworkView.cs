@@ -32,18 +32,42 @@ public class RoadNetworkView : MonoBehaviour
         endPosition = roadView.RoadEndPosition;
     }
 
-    public void GetCrossRoadsStartEnd(Vehicle vehicle, CrossRoads crossRoads, out Vector3 startPosition, out Vector3 endPosition)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="vehicle"></param>
+    /// <param name="crossRoads"></param>
+    /// <param name="startPosition"></param>
+    /// <param name="endPosition"></param>
+    /// <param name="bezierMidPoint"> can be used in a quadratic bezier function to produce a smooth turn </param> 
+    /// <param name="isStraight"></param>
+    public void GetCrossRoadsPathData(Vehicle vehicle, CrossRoads crossRoads, out Vector3 startPosition, out Vector3 bezierMidPoint, out Vector3 endPosition)
     {
         var inboundRoadDir = NavigationUtility.GetOpposite(vehicle.GetNextStep().ApproachDirection);
         var outboundRoadDir = vehicle.GetNextStep().ExitDirection;
-        
+
         RoadSegment inboundRoadSegment = crossRoads.InboundRoads[inboundRoadDir];
         RoadSegment outboundRoadSegment = crossRoads.OutboundRoads[outboundRoadDir];
-        
+
         var inboundRoadView = _roadViewLookUp[inboundRoadSegment];
         var outboundRoadView = _roadViewLookUp[outboundRoadSegment];
 
         startPosition = inboundRoadView.RoadEndPosition;
         endPosition = outboundRoadView.RoadStartPosition;
+
+        if (inboundRoadDir == outboundRoadDir)
+        {
+            bezierMidPoint = Vector3.zero;
+            return;
+        }
+
+        Vector3 inboundDir = (inboundRoadView.RoadEndPosition - inboundRoadView.RoadStartPosition).normalized;
+        Vector3 outboundDir = (outboundRoadView.RoadEndPosition - outboundRoadView.RoadStartPosition).normalized;
+
+        if (!MathUtility.TryFindLinesIntersection(startPosition, inboundDir, endPosition, outboundDir, out bezierMidPoint))
+        {
+            Debug.LogError("trying to find intersection point of parallel lines");
+        }
     }
+
 }
