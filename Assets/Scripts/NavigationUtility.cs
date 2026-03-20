@@ -79,8 +79,10 @@ public static class NavigationUtility
             return AreOpposingMovementsConflicting(turnA, turnB);
         }
 
-        // Perpendicular — always conflicting (different light phases)
-        return true;
+        // Perpendicular — only non-conflicting if the "inner" vehicle is turning left.
+        // The inner vehicle is the one whose left turn exits toward the other's approach direction,
+        // meaning it takes a tight curve that doesn't cross the other vehicle's path.
+        return ArePerpendicularMovementsConflicting(approachA, turnA, approachB, turnB);
     }
 
     private static bool AreOpposite(Direction a, Direction b)
@@ -93,5 +95,18 @@ public static class NavigationUtility
     {
         // right turns always conflict / have to be sequential with oncoming traffic as it moves across the opposing traffic lane
         return (turnA == TurnDirection.Right || turnB == TurnDirection.Right);
+    }
+
+    private static bool ArePerpendicularMovementsConflicting(Direction approachA, TurnDirection turnA, Direction approachB, TurnDirection turnB)
+    {
+        // Check if A's left turn exits toward B's approach — making A the "inner" vehicle
+        bool aIsInner = ResolveExitDirection(approachA, TurnDirection.Left) == approachB;
+
+        if ((aIsInner && turnA == TurnDirection.Left) || (!aIsInner && turnB == TurnDirection.Left))
+        {
+            return false;
+        }
+
+        return true;
     }
 }
