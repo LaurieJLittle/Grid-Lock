@@ -520,8 +520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _padding: 0.5
-  _minXY: {x: -2.5, y: -2.5}
-  _maxXY: {x: 2.5, y: 2.5}
+  _minXY: {x: -3.5, y: -2.5}
+  _maxXY: {x: 1, y: 1.5}
 --- !u!114 &340960257 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5840043741010171131, guid: 838bc99e28d87c649942430567abffe3, type: 3}
@@ -3464,7 +3464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080175998}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.35355338, y: -0.1464466, z: 0.35355338, w: 0.8535535}
   m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3478,7 +3478,7 @@ Transform:
   - {fileID: 580674001}
   - {fileID: 2115963082}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 45}
 --- !u!114 &2080176000
 MonoBehaviour:
   m_ObjectHideFlags: 0

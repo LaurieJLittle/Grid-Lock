@@ -119,7 +119,7 @@ public class VehicleView : MonoBehaviour
             flip = false;
         }
 
-        int index = Mathf.Clamp(Mathf.RoundToInt( (180 - spriteAngle) / 10f), 0, _rotationSprites.Length - 1);
+        int index = Mathf.Clamp(Mathf.CeilToInt( (180 - spriteAngle) / 5), 0, _rotationSprites.Length - 1);
         _spriteRenderer.sprite = _rotationSprites[index];
         _spriteRenderer.flipX = flip;
 
