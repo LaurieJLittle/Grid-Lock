@@ -18,9 +18,16 @@ public class VehicleView : MonoBehaviour
     private float _targetAngle;
     private float _currentAngle;
     private readonly float _turnSpeed = 240f; // LL - TODO consider whether this is still nessecary now we have Bezier curves
+    private const float kCameraElevationDeg = 45f;
 
+    private float _sinCameraElevation;
     private Vector3 _bezierMidPoint;
     private bool _hasBezierPath;
+
+    private void Start()
+    {
+        _sinCameraElevation = Mathf.Sin(kCameraElevationDeg * Mathf.Deg2Rad);
+    }
 
     public void SetData(Vehicle targetVehicle, RoadNetworkView roadNetworkView)
     {
@@ -119,7 +126,15 @@ public class VehicleView : MonoBehaviour
             flip = false;
         }
 
-        int index = Mathf.Clamp(Mathf.CeilToInt( (180 - spriteAngle) / 5), 0, _rotationSprites.Length - 1);
+        float spriteAngleRad = spriteAngle * Mathf.Deg2Rad;
+        float worldAngle = Mathf.Atan2(Mathf.Sin(spriteAngleRad) * _sinCameraElevation, Mathf.Cos(spriteAngleRad)) * Mathf.Rad2Deg;
+        if (worldAngle < 0f)
+        {
+            worldAngle += 360f;
+        }
+
+        float degreesPerSprite = 180f / (_rotationSprites.Length - 1);
+        int index = Mathf.Clamp(Mathf.RoundToInt((180f - worldAngle) / degreesPerSprite), 0, _rotationSprites.Length - 1);
         _spriteRenderer.sprite = _rotationSprites[index];
         _spriteRenderer.flipX = flip;
 

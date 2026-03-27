@@ -12,7 +12,7 @@ public class VehicleConfig : ScriptableObject
     [SerializeField] private float _rightTurnTraversalTime = 2f;
     [SerializeField] private float _straightTraversalTime = 1.5f;
     [SerializeField] private float _speed = 2f; // Speed / Capacity = time to fully traverse road segment
-    [SerializeField] private Sprite[] _rotationSprites; // LL TODO - expectation is 19 sprites at 10 degree intervals, making a 180 turn - should probably add unit testing for this
+    [SerializeField] private Sprite[] _rotationSprites; // LL TODO - expectation is 37 sprites at 5 degree intervals, making a 180 turn - should probably add unit testing for this
 
     public enum Type
     {
