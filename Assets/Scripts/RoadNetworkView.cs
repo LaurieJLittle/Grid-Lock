@@ -41,13 +41,13 @@ public class RoadNetworkView : MonoBehaviour
     /// <param name="endPosition"></param>
     /// <param name="bezierMidPoint"> can be used in a quadratic bezier function to produce a smooth turn </param> 
     /// <param name="isStraight"></param>
-    public void GetCrossRoadsPathData(Vehicle vehicle, CrossRoads crossRoads, out Vector3 startPosition, out Vector3 bezierMidPoint, out Vector3 endPosition)
+    public void GetCrossRoadsPathData(Vehicle vehicle, CrossRoads crossRoads, out Vector3 startPosition, out Vector3 bezierMidPoint, out Vector3 endPosition, out Vector3 inboundDir, out Vector3 outboundDir)
     {
-        var inboundRoadDir = NavigationUtility.GetOpposite(vehicle.GetNextStep().ApproachDirection);
-        var outboundRoadDir = vehicle.GetNextStep().ExitDirection;
+        var inboundRoadDirEnum = NavigationUtility.GetOpposite(vehicle.GetNextStep().ApproachDirection);
+        var outboundRoadDirEnum = vehicle.GetNextStep().ExitDirection;
 
-        RoadSegment inboundRoadSegment = crossRoads.InboundRoads[inboundRoadDir];
-        RoadSegment outboundRoadSegment = crossRoads.OutboundRoads[outboundRoadDir];
+        RoadSegment inboundRoadSegment = crossRoads.InboundRoads[inboundRoadDirEnum];
+        RoadSegment outboundRoadSegment = crossRoads.OutboundRoads[outboundRoadDirEnum];
 
         var inboundRoadView = _roadViewLookUp[inboundRoadSegment];
         var outboundRoadView = _roadViewLookUp[outboundRoadSegment];
@@ -55,14 +55,14 @@ public class RoadNetworkView : MonoBehaviour
         startPosition = inboundRoadView.RoadEndPosition;
         endPosition = outboundRoadView.RoadStartPosition;
 
-        if (inboundRoadDir == outboundRoadDir)
+        inboundDir = (inboundRoadView.RoadEndPosition - inboundRoadView.RoadStartPosition).normalized;
+        outboundDir = (outboundRoadView.RoadEndPosition - outboundRoadView.RoadStartPosition).normalized;
+
+        if (inboundRoadDirEnum == outboundRoadDirEnum)
         {
             bezierMidPoint = Vector3.zero;
             return;
         }
-
-        Vector3 inboundDir = (inboundRoadView.RoadEndPosition - inboundRoadView.RoadStartPosition).normalized;
-        Vector3 outboundDir = (outboundRoadView.RoadEndPosition - outboundRoadView.RoadStartPosition).normalized;
 
         if (!MathUtility.TryFindLinesIntersection(startPosition, inboundDir, endPosition, outboundDir, out bezierMidPoint))
         {

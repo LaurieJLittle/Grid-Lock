@@ -15,5 +15,5 @@ MonoBehaviour:
   _timeLimit: 120
   _levelStartSpawnInterval: 1.4
   _levelEndSpawnIntervalSpawnInterval: 0.75
-  _levelStartLorrySpawnProbability: 0
-  _levelEndLorrySpawnProbability: 0.2
+  _levelStartLorrySpawnProbability: 0.5
+  _levelEndLorrySpawnProbability: 0.5

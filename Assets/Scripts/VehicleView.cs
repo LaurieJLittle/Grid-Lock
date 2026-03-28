@@ -23,6 +23,8 @@ public class VehicleView : MonoBehaviour
     private float _sinCameraElevation;
     private Vector3 _bezierMidPoint;
     private bool _hasBezierPath;
+    private Vector3 _crossRoadsStartOffset;
+    private Vector3 _crossRoadsEndOffset;
 
     private void Start()
     {
@@ -90,8 +92,13 @@ public class VehicleView : MonoBehaviour
             {
                 if (_hasBezierPath)
                 {
-                    transform.position = MathUtility.QuadraticBezier(startPosition, _bezierMidPoint, endPosition, progress);
-                    Vector3 tangent = MathUtility.QuadraticBezierTangent(startPosition, _bezierMidPoint, endPosition, progress);
+                    // need to lerp between vehicle offset on previous road to vehicle offset on new road as well for smooth turn.
+                    Vector3 unshiftedStart = startPosition - _crossRoadsStartOffset;
+                    Vector3 unshiftedEnd = endPosition - _crossRoadsEndOffset;
+                    
+                    transform.position = MathUtility.QuadraticBezier(unshiftedStart, _bezierMidPoint, unshiftedEnd, progress)
+                        + Vector3.Lerp(_crossRoadsStartOffset, _crossRoadsEndOffset, progress);
+                    Vector3 tangent = MathUtility.QuadraticBezierTangent(unshiftedStart, _bezierMidPoint, unshiftedEnd, progress);
                     _targetAngle = DirectionToAngle(tangent);
                 }
                 else
@@ -156,13 +163,29 @@ public class VehicleView : MonoBehaviour
         if (_vehicle.CurrentSegment != null)
         {
             _roadNetworkView.GetSegmentStartEnd(_vehicle.CurrentSegment, out startPosition, out endPosition);
+            
+            // offset vehicle by distance from front to centre of vehicle so front of vehicle reflects progress value not centre
+            // this means e.g, when stopping at a cross roads the front of the vehicle will be on the give way line, not the middle
+            Vector3 dir = (endPosition - startPosition).normalized;
+            float offsetMagnitude = _vehicle.VehicleConfig.CentreToFrontDistance;
+            startPosition -= dir * offsetMagnitude;
+            endPosition -= dir * offsetMagnitude;
+            
             progress = _vehicle.SegmentProgress;
             _hasBezierPath = false;
             return true;
         }
         else if (_vehicle.TraversingCrossRoads != null)
         {
-            _roadNetworkView.GetCrossRoadsPathData(_vehicle, _vehicle.TraversingCrossRoads, out startPosition, out _bezierMidPoint, out endPosition);
+            _roadNetworkView.GetCrossRoadsPathData(_vehicle, _vehicle.TraversingCrossRoads, out startPosition, out _bezierMidPoint, out endPosition, out Vector3 inboundDir, out Vector3 outboundDir);
+            
+            // offset vehicle by distance from front to centre of vehicle so front of vehicle reflects progress value not centre
+            float offsetMagnitude = _vehicle.VehicleConfig.CentreToFrontDistance;
+            _crossRoadsStartOffset = -inboundDir * offsetMagnitude;
+            _crossRoadsEndOffset = -outboundDir * offsetMagnitude;
+            startPosition += _crossRoadsStartOffset;
+            endPosition += _crossRoadsEndOffset;
+            
             progress = (_vehicle.FullTraversalTime - _vehicle.CrossroadsTraversalTimeLeft) / _vehicle.FullTraversalTime;
             _hasBezierPath = _vehicle.GetNextStep().Turn != TurnDirection.Straight;
             return true;
