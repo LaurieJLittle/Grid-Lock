@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vehicleType: 0
   _size: 1
-  _leftTurnTraversalTime: 0.75
+  _leftTurnTraversalTime: 1
   _rightTurnTraversalTime: 2
   _straightTraversalTime: 1.5
   _speed: 2
+  _centreToFrontDistance: 0.1
   _rotationSprites:
   - {fileID: 21300000, guid: 461fb857e636ebb49993b19c01a943da, type: 3}
   - {fileID: 21300000, guid: a816367f36c29054e92e6c3117cc0268, type: 3}

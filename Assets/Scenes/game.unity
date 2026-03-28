@@ -520,8 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _padding: 0.5
-  _minXY: {x: -3.5, y: -2.5}
-  _maxXY: {x: 1, y: 1.5}
+  _environmentParent: {fileID: 2080175998}
 --- !u!114 &340960257 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5840043741010171131, guid: 838bc99e28d87c649942430567abffe3, type: 3}
