@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RoadNetworkView : MonoBehaviour
 {
+    [SerializeField] float _turnPathSmoothingFactor = 0.3f;
     [SerializeField] private CrossRoadView[] _crossRoadsViews;
     [SerializeField] private RoadSegmentView[] _roadSegmentViews;
     
@@ -68,6 +70,9 @@ public class RoadNetworkView : MonoBehaviour
         {
             Debug.LogError("trying to find intersection point of parallel lines");
         }
+        
+        Vector3 linearMid = (startPosition + endPosition) * 0.5f;
+        bezierMidPoint = Vector3.Lerp(bezierMidPoint, linearMid, _turnPathSmoothingFactor);
     }
 
 }

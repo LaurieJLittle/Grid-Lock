@@ -17,7 +17,7 @@ public class VehicleView : MonoBehaviour
 
     private float _targetAngle;
     private float _currentAngle;
-    private readonly float _turnSpeed = 35; // LL - TODO consider whether this is still nessecary now we have Bezier curves
+    private readonly float _turnSpeed = 100; // LL - TODO consider whether this is still nessecary now we have Bezier curves
     private const float kCameraElevationDeg = 45f;
 
     private float _sinCameraElevation;
