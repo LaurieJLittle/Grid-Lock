@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ed638d429dbe0d46bad06141e32747f
+guid: d42923fc5628def42911b8a320ebda26
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6954597020948451569
-    second: Image Sequence_016_0019_0
+      213: -3772977060330500427
+    second: CrossRoadsRotLeadinSpace_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,9 +51,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1600
+  spritePixelsToUnits: 461
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Image Sequence_016_0019_0
+      name: CrossRoadsRotLeadinSpace_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 161
-        width: 471
-        height: 183
+        x: 0
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0fa0624bde4c7f90800000000000000
-      internalID: -6954597020948451569
+      spriteID: 5be8d4d8a51b3abc0800000000000000
+      internalID: -3772977060330500427
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Image Sequence_016_0019_0: -6954597020948451569
+      CrossRoadsRotLeadinSpace_0: -3772977060330500427
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

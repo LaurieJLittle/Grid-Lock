@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vehicleType: 1
   _size: 2
-  _leftTurnTraversalTime: 1
-  _rightTurnTraversalTime: 2
-  _straightTraversalTime: 1.5
+  _leftTurnTraversalTime: 1.5
+  _rightTurnTraversalTime: 2.5
+  _straightTraversalTime: 2
   _speed: 2
   _centreToFrontDistance: 0.2
   _rotationSprites:
