@@ -12,6 +12,7 @@ public class SpawnManager
     private float _nextSpawnCountdown;
 
     public event Action<Vehicle, RoadSegment> OnVehicleReadyToSpawn;
+    public event Action<RoadSegment> OnSpawnFailed;
 
     public SpawnManager(RoadNetwork network)
     {
@@ -48,7 +49,7 @@ public class SpawnManager
         }
 
         RoadSegment spawnSegment = _network.SpawnSegments.RandomItem();
-        spawnSegment.MarkSpawnPending(kSpawnHeadsUp);
+        spawnSegment.MarkSpawnPending(kSpawnHeadsUp, vehicleConfig);
 
         var pending = new PendingSpawn(vehicleConfig, spawnSegment);
         _pendingSpawns.Enqueue(pending);
@@ -67,13 +68,15 @@ public class SpawnManager
         if (!pendingSpawn.SpawnSegment.HasSpace(pendingSpawn.VehicleConfig.Size))
         {
             Debug.Log("Spawn segment doesn't have space available");
+            OnSpawnFailed?.Invoke(pendingSpawn.SpawnSegment);
             return;
         }
-        
+
         List<RouteStep> route = _routeProvider.FindRoute(pendingSpawn.SpawnSegment, _network.ExitSegments.RandomItem());
         if (route == null || route.Count == 0)
         {
             Debug.LogWarning($"No valid route from segment {pendingSpawn.SpawnSegment.Id}");
+            OnSpawnFailed?.Invoke(pendingSpawn.SpawnSegment);
             return;
         }
 

@@ -5,8 +5,8 @@ using UnityEngine;
 // Manages the round, controlling the other main managing classes
 public class RoundManager : MonoBehaviour
 {
-    [SerializeField] private VehicleView _vehicleViewPrefab;
     [SerializeField] private RoadNetworkView _networkView;
+    [SerializeField] private VehicleViewFactory _vehicleViewFactory;
     [SerializeField] private LevelData _levelData;
     [SerializeField] private ScoreUI _scoreUI;
     [SerializeField] private TimerUI _timerUI;
@@ -28,7 +28,7 @@ public class RoundManager : MonoBehaviour
         BuildNetwork();
         _networkView.Init(_network);
         _simulationManager = new SimulationManager(_crossRoadsPrioritization);
-        _simulationManager.OnVehicleSpawned += CreateVehicleView;
+        _simulationManager.OnVehicleSpawned += _vehicleViewFactory.ActivatePreview;
         _scoreUI.SetData(_simulationManager);
         _timerUI.SetData(_levelData.TimeLimit);
         
@@ -39,6 +39,7 @@ public class RoundManager : MonoBehaviour
         
         _spawnManager = new SpawnManager(_network);
         _spawnManager.OnVehicleReadyToSpawn += _simulationManager.AddVehicle;
+        _vehicleViewFactory.Init(_network, _spawnManager);
     }
     
     private void BuildNetwork()
@@ -96,12 +97,6 @@ public class RoundManager : MonoBehaviour
                 : _vehicleConfigsDict[VehicleConfig.Type.Lorry];
             _spawnManager.QueueSpawn(vehicleConfig);
         }
-    }
-
-    private void CreateVehicleView(Vehicle vehicle)
-    {
-        VehicleView vehicleView = Instantiate(_vehicleViewPrefab);
-        vehicleView.SetData(vehicle, _networkView);
     }
 
     private void RoundFinished()

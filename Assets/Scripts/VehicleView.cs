@@ -2,14 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class VehicleView : MonoBehaviour
 {
+    private const float kCameraElevationDeg = 45f;
+    
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private SpriteRenderer _turnIndicator;
     [SerializeField] private Sprite _leftTurnSprite;
     [SerializeField] private Sprite _straightTurnSprite;
-    [SerializeField] private Sprite _rightTurnSprite;
+    [SerializeField] private Sprite _rightTurnSprite; 
+    [SerializeField] private float _previewPulseFrequency = 4f;
+    [SerializeField] private float _previewPulseAlphaMin = 0.3f;
+    [SerializeField] private float _previewPulseAlphaMax = 0.7f;
+    [SerializeField] private float _spawnFailedDisplayDuration = 0.5f;
 
     private Vehicle _vehicle;
     private RoadNetworkView _roadNetworkView;
@@ -18,13 +25,13 @@ public class VehicleView : MonoBehaviour
     private float _targetAngle;
     private float _currentAngle;
     private readonly float _turnSpeed = 100; // LL - TODO consider whether this is still nessecary now we have Bezier curves
-    private const float kCameraElevationDeg = 45f;
 
     private float _sinCameraElevation;
     private Vector3 _bezierMidPoint;
     private bool _hasBezierPath;
     private Vector3 _crossRoadsStartOffset;
     private Vector3 _crossRoadsEndOffset;
+    private Coroutine _previewCoroutine;
 
     private void Start()
     {
@@ -44,8 +51,71 @@ public class VehicleView : MonoBehaviour
         UpdateSpriteFromAngle();
     }
 
+    public void SetPreviewData(VehicleConfig vehicleConfig, Vector3 position, Vector3 direction)
+    {
+        _sinCameraElevation = Mathf.Sin(kCameraElevationDeg * Mathf.Deg2Rad);
+        _rotationSprites = vehicleConfig.RotationSprites;
+
+        transform.position = position;
+        _targetAngle = DirectionToAngle(direction);
+        _currentAngle = _targetAngle;
+        UpdateSpriteFromAngle();
+
+        _turnIndicator.gameObject.SetActive(false);
+        _previewCoroutine = StartCoroutine(PulsePreview());
+    }
+
+    public void ActivateFromPreview(Vehicle vehicle, RoadNetworkView roadNetworkView)
+    {
+        if (_previewCoroutine != null)
+        {
+            StopCoroutine(_previewCoroutine);
+            _previewCoroutine = null;
+        }
+
+        _spriteRenderer.color = Color.white;
+        SetData(vehicle, roadNetworkView);
+    }
+
+    public void ShowSpawnFailed()
+    {
+        if (_previewCoroutine != null)
+        {
+            StopCoroutine(_previewCoroutine);
+            _previewCoroutine = null;
+        }
+
+        StartCoroutine(SpawnFailedAnimation());
+    }
+
+    private IEnumerator PulsePreview()
+    {
+        float t = 0f;
+        while (true)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(_previewPulseAlphaMin, _previewPulseAlphaMax, (Mathf.Sin(t * Mathf.PI * _previewPulseFrequency) + 1f) * 0.5f);
+            Color c = _spriteRenderer.color;
+            c.a = alpha;
+            _spriteRenderer.color = c;
+            yield return null;
+        }
+    }
+
+    private IEnumerator SpawnFailedAnimation()
+    {
+        _spriteRenderer.color = new Color(1f, 0f, 0f, 0.5f);
+        yield return new WaitForSeconds(_spawnFailedDisplayDuration);
+        Destroy(gameObject);
+    }
+
     private void OnDestroy()
     {
+        if (_vehicle == null)
+        {
+            return;
+        }
+
         _vehicle.TripComplete -= OnTripComplete;
         _vehicle.OnStateChanged -= OnVehicleStateChanged;
     }

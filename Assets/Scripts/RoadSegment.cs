@@ -15,7 +15,7 @@ public class RoadSegment
     public CrossRoads ToCrossRoads { get; set; }
     private int FreeUnits => Capacity - _occupiedUnits - _reservedUnits;
     
-    public event Action<float> OnSpawnPending;
+    public event Action<float, VehicleConfig> OnSpawnPending;
 
     public RoadSegment(int id, int capacity, Direction direction)
     {
@@ -24,9 +24,9 @@ public class RoadSegment
         Direction = direction;
     }
 
-    public void MarkSpawnPending(float timeTillSpawn)
+    public void MarkSpawnPending(float timeTillSpawn, VehicleConfig vehicleConfig)
     {
-        OnSpawnPending?.Invoke(timeTillSpawn);
+        OnSpawnPending?.Invoke(timeTillSpawn, vehicleConfig);
     }
     
     public void ReserveSpace(int units)
