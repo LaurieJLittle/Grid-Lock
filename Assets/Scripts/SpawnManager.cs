@@ -10,6 +10,7 @@ public class SpawnManager
     private readonly RouteProvider _routeProvider;
     private readonly Queue<PendingSpawn> _pendingSpawns = new Queue<PendingSpawn>();
     private float _nextSpawnCountdown;
+    private RoadSegment _lastSpawnSegment;
 
     public event Action<Vehicle, RoadSegment> OnVehicleReadyToSpawn;
     public event Action<RoadSegment> OnSpawnFailed;
@@ -48,7 +49,8 @@ public class SpawnManager
             return;
         }
 
-        RoadSegment spawnSegment = _network.SpawnSegments.RandomItem();
+        RoadSegment spawnSegment = GetNextSpawnSegment();
+        _lastSpawnSegment = spawnSegment;
         spawnSegment.MarkSpawnPending(kSpawnHeadsUp, vehicleConfig);
 
         var pending = new PendingSpawn(vehicleConfig, spawnSegment);
@@ -82,6 +84,23 @@ public class SpawnManager
 
         var vehicle = new Vehicle(route, pendingSpawn.VehicleConfig);
         OnVehicleReadyToSpawn?.Invoke(vehicle, pendingSpawn.SpawnSegment);
+    }
+
+    private RoadSegment GetNextSpawnSegment()
+    {
+        var segments = _network.SpawnSegments;
+        if (segments.Count <= 1 || _lastSpawnSegment == null)
+        {
+            return segments.RandomItem();
+        }
+
+        RoadSegment potentialSpawnSegment;
+        do
+        {
+            potentialSpawnSegment = segments.RandomItem();
+        } while (potentialSpawnSegment == _lastSpawnSegment);
+
+        return potentialSpawnSegment;
     }
 
     private class PendingSpawn
