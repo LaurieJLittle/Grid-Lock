@@ -34,6 +34,11 @@ public class RoadNetworkView : MonoBehaviour
         endPosition = roadView.RoadEndPosition;
     }
 
+    public float GetSegmentWorldLength(RoadSegment roadSegment)
+    {
+        return _roadViewLookUp[roadSegment].WorldLength;
+    }
+
     /// <summary>
     /// 
     /// </summary>

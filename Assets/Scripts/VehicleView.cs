@@ -17,6 +17,7 @@ public class VehicleView : MonoBehaviour
     [SerializeField] private float _previewPulseAlphaMin = 0.3f;
     [SerializeField] private float _previewPulseAlphaMax = 0.7f;
     [SerializeField] private float _spawnFailedDisplayDuration = 0.5f;
+    [SerializeField] private float _exitFadeDuration = 0.5f;
     [SerializeField] private float _compressedIndicatorAxisScale = 0.5f;
     [SerializeField] private float _regularIndicatorAxisScale = 1f;
     [SerializeField] private float _indicatorForwardOffset = 0.3f;
@@ -35,6 +36,7 @@ public class VehicleView : MonoBehaviour
     private Vector3 _crossRoadsStartOffset;
     private Vector3 _crossRoadsEndOffset;
     private Coroutine _previewCoroutine;
+    private bool _isFadingOut;
 
     private void Start()
     {
@@ -167,7 +169,7 @@ public class VehicleView : MonoBehaviour
 
     private void Update()
     {
-        if (_vehicle != null)
+        if (_vehicle != null && !_isFadingOut)
         {
             if (TryGetCurrentPathData(out Vector3 startPosition, out Vector3 endPosition, out float progress))
             {
@@ -321,6 +323,40 @@ public class VehicleView : MonoBehaviour
 
     private void OnTripComplete()
     {
+        _vehicle.TripComplete -= OnTripComplete;
+        _vehicle.OnStateChanged -= OnVehicleStateChanged;
+
+        _isFadingOut = true;
+
+        float worldSpeed = 0f;
+        if (_vehicle.CurrentSegment != null)
+        {
+            float worldLength = _roadNetworkView.GetSegmentWorldLength(_vehicle.CurrentSegment);
+            worldSpeed = _vehicle.VehicleConfig.Speed * worldLength / _vehicle.CurrentSegment.Capacity;
+        }
+
+        float angle = _currentAngle * Mathf.Deg2Rad;
+        Vector3 exitDirection = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0f);
+        StartCoroutine(FadeOutAndDestroy(exitDirection, worldSpeed));
+    }
+
+    private IEnumerator FadeOutAndDestroy(Vector3 direction, float speed)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < _exitFadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            transform.position += direction * speed * Time.deltaTime;
+
+            float alpha = 1f - (elapsed / _exitFadeDuration);
+            Color c = _spriteRenderer.color;
+            c.a = alpha;
+            _spriteRenderer.color = c;
+
+            yield return null;
+        }
+
         Destroy(gameObject);
     }
 }
