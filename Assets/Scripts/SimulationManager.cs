@@ -9,6 +9,7 @@ public class SimulationManager
     private readonly Dictionary<int, Dictionary<int, CrossRoadsEntryRequest>> _pendingEntries = new();
     private readonly Dictionary<int, List<int>> _pendingEntryIds = new Dictionary<int, List<int>>();
     private readonly CrossRoadsPrioritization _crossRoadsPrioritization;
+    private readonly HashSet<int> _processedRequestIds = new HashSet<int>();
     private float _spawnTimer;
     
     public event Action<Vehicle> OnVehicleSpawned;
@@ -128,7 +129,7 @@ public class SimulationManager
     {
         foreach (var crossRoadsId in _pendingEntries.Keys)
         {
-            HashSet<int> processedRequestIds = new HashSet<int>();
+            _processedRequestIds.Clear();
             foreach (var vehicleId in _pendingEntryIds[crossRoadsId])
             {
                 var req = _pendingEntries[crossRoadsId][vehicleId];
@@ -167,10 +168,10 @@ public class SimulationManager
                 req.CrossRoads.ReservePath(req.Vehicle, req.ApproachFrom, req.Turn);
                 req.Vehicle.CurrentSegment?.RemoveVehicle(req.Vehicle);
                 req.Vehicle.BeginTraversal(req.CrossRoads, req.Turn);
-                processedRequestIds.Add(vehicleId);
+                _processedRequestIds.Add(vehicleId);
             }
 
-            foreach (var requestId in processedRequestIds)
+            foreach (var requestId in _processedRequestIds)
             {
                 _pendingEntries[crossRoadsId].Remove(requestId);
                 _pendingEntryIds[crossRoadsId].Remove(requestId);

@@ -69,10 +69,10 @@ public class CrossRoads
 
     public bool IsPathConflicting(Direction approachFrom, TurnDirection turn)
     {
-        foreach (var traversal in _traversalDetails.Values)
+        foreach (var kvp in _traversalDetails)
         {
             if (NavigationUtility.AreTurnsConflicting(
-                    traversal.ApproachFrom, traversal.Turn, approachFrom, turn))
+                    kvp.Value.ApproachFrom, kvp.Value.Turn, approachFrom, turn))
             {
                 return true;
             }

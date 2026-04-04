@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private float _padding = 0.5f;
-    [SerializeField] private GameObject _environmentParent;
+    [SerializeField] private List<Transform> _environmentTransforms;
     
     private Vector2 _minXY;
     private Vector2 _maxXY;
@@ -15,8 +16,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         _cam = GetComponent<Camera>();
-        var environmentTransforms = _environmentParent.GetComponentsInChildren<Transform>(); // LL TODO - optimize
-        foreach (var environmentTransform in environmentTransforms)
+        foreach (var environmentTransform in _environmentTransforms)
         {
             _minXY.x = Mathf.Min(environmentTransform.position.x, _minXY.x);
             _minXY.y = Mathf.Min(environmentTransform.position.y, _minXY.y);
