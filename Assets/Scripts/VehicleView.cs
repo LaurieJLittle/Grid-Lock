@@ -156,8 +156,7 @@ public class VehicleView : MonoBehaviour
             if (_vehicle.CurrentSegment != null)
             {
                 Direction travelDirection = _vehicle.CurrentSegment.Direction;
-                _roadNetworkView.GetSegmentStartEnd(_vehicle.CurrentSegment, out Vector3 start, out Vector3 end);
-                Vector3 forwardDir = (end - start).normalized;
+                Vector3 forwardDir = _roadNetworkView.GetSegmentForwardDirection(_vehicle.CurrentSegment);
                 ApplyTurnIndicatorTransform(travelDirection, forwardDir);
             }
         }
@@ -288,7 +287,7 @@ public class VehicleView : MonoBehaviour
             
             // offset vehicle by distance from front to centre of vehicle so front of vehicle reflects progress value not centre
             // this means e.g, when stopping at a cross roads the front of the vehicle will be on the give way line, not the middle
-            Vector3 dir = (endPosition - startPosition).normalized;
+            Vector3 dir = _roadNetworkView.GetSegmentForwardDirection(_vehicle.CurrentSegment);
             float offsetMagnitude = _vehicle.VehicleConfig.CentreToFrontDistance;
             startPosition -= dir * offsetMagnitude;
             endPosition -= dir * offsetMagnitude;

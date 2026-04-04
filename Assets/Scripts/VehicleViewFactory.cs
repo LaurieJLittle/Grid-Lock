@@ -35,7 +35,7 @@ public class VehicleViewFactory : MonoBehaviour
     private void CreatePreview(VehicleConfig config, RoadSegment segment)
     {
         _networkView.GetSegmentStartEnd(segment, out Vector3 start, out Vector3 end);
-        Vector3 dir = (end - start).normalized;
+        Vector3 dir = _networkView.GetSegmentForwardDirection(segment);
         Vector3 position = start - dir * config.CentreToFrontDistance;
 
         VehicleView preview = Instantiate(_vehicleViewPrefab);

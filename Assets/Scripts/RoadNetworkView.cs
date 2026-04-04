@@ -39,6 +39,11 @@ public class RoadNetworkView : MonoBehaviour
         return _roadViewLookUp[roadSegment].WorldLength;
     }
 
+    public Vector3 GetSegmentForwardDirection(RoadSegment roadSegment)
+    {
+        return _roadViewLookUp[roadSegment].ForwardDirection;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -62,8 +67,8 @@ public class RoadNetworkView : MonoBehaviour
         startPosition = inboundRoadView.RoadEndPosition;
         endPosition = outboundRoadView.RoadStartPosition;
 
-        inboundDir = (inboundRoadView.RoadEndPosition - inboundRoadView.RoadStartPosition).normalized;
-        outboundDir = (outboundRoadView.RoadEndPosition - outboundRoadView.RoadStartPosition).normalized;
+        inboundDir = inboundRoadView.ForwardDirection;
+        outboundDir = outboundRoadView.ForwardDirection;
 
         if (inboundRoadDirEnum == outboundRoadDirEnum)
         {

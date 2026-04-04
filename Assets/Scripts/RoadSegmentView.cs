@@ -10,9 +10,12 @@ public class RoadSegmentView : MonoBehaviour
     public Vector3 RoadStartPosition => _roadStart.position;
     public Vector3 RoadEndPosition => _roadEnd.position;
     public float WorldLength { get; private set; }
+    public Vector3 ForwardDirection { get; private set; }
 
     public void BindToNetwork(RoadSegment roadSegment)
     {
-        WorldLength = (_roadEnd.position - _roadStart.position).magnitude;
+        Vector3 delta = _roadEnd.position - _roadStart.position;
+        WorldLength = delta.magnitude;
+        ForwardDirection = delta / WorldLength;
     }
 }
