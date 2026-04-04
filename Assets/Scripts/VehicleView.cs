@@ -17,6 +17,9 @@ public class VehicleView : MonoBehaviour
     [SerializeField] private float _previewPulseAlphaMin = 0.3f;
     [SerializeField] private float _previewPulseAlphaMax = 0.7f;
     [SerializeField] private float _spawnFailedDisplayDuration = 0.5f;
+    [SerializeField] private float _compressedIndicatorAxisScale = 0.5f;
+    [SerializeField] private float _regularIndicatorAxisScale = 1f;
+    [SerializeField] private float _indicatorForwardOffset = 0.3f;
 
     private Vehicle _vehicle;
     private RoadNetworkView _roadNetworkView;
@@ -147,6 +150,14 @@ public class VehicleView : MonoBehaviour
                     _turnIndicator.sprite = _straightTurnSprite;
                     break;
             }
+
+            if (_vehicle.CurrentSegment != null)
+            {
+                Direction travelDirection = _vehicle.CurrentSegment.Direction;
+                _roadNetworkView.GetSegmentStartEnd(_vehicle.CurrentSegment, out Vector3 start, out Vector3 end);
+                Vector3 forwardDir = (end - start).normalized;
+                ApplyTurnIndicatorTransform(travelDirection, forwardDir);
+            }
         }
         else
         {
@@ -214,8 +225,47 @@ public class VehicleView : MonoBehaviour
         int index = Mathf.Clamp(Mathf.RoundToInt((180f - worldAngle) / degreesPerSprite), 0, _rotationSprites.Length - 1);
         _spriteRenderer.sprite = _rotationSprites[index];
         _spriteRenderer.flipX = flip;
+    }
 
-        _turnIndicator.transform.rotation = Quaternion.Euler(0f, 0f, -_currentAngle);
+    private void ApplyTurnIndicatorTransform(Direction travelDirection, Vector3 forwardDir)
+    {
+        float rotation;
+        float scaleX;
+        float scaleY;
+
+        switch (travelDirection)
+        {
+            case Direction.North:
+                rotation = 0f;
+                scaleX = _regularIndicatorAxisScale;
+                scaleY = _compressedIndicatorAxisScale;
+                break;
+            case Direction.East:
+                rotation = -90f;
+                scaleX = _compressedIndicatorAxisScale;
+                scaleY = _regularIndicatorAxisScale;
+                break;
+            case Direction.South:
+                rotation = 180f;
+                scaleX = _regularIndicatorAxisScale;
+                scaleY = _compressedIndicatorAxisScale;
+                break;
+            case Direction.West:
+                rotation = 90f;
+                scaleX = _compressedIndicatorAxisScale;
+                scaleY = _regularIndicatorAxisScale;
+                break;
+            default:
+                Debug.LogError("invalid travel direction detected, turn indicator not configured");
+                rotation = 0f;
+                scaleX = _regularIndicatorAxisScale;
+                scaleY = _regularIndicatorAxisScale;
+                break;
+        }
+
+        _turnIndicator.transform.localPosition = forwardDir * _indicatorForwardOffset * (1 + _vehicle.VehicleConfig.Size);
+        _turnIndicator.transform.localRotation = Quaternion.Euler(0f, 0f, rotation);
+        _turnIndicator.transform.localScale = new Vector3(scaleX, scaleY, 1f);
     }
 
     private float DirectionToAngle(Vector3 dir)
