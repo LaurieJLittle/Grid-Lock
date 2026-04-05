@@ -15,7 +15,7 @@ namespace GridLock.View
         [SerializeField] private LevelData _levelData;
         [SerializeField] private ScoreUI _scoreUI;
         [SerializeField] private TimerUI _timerUI;
-        [SerializeField] private List<VehicleConfig> _vehicleConfigs;
+        [SerializeField] private VehicleMovementConfig _vehicleMovementConfig;
         [SerializeField] private CrossRoadsPrioritization _crossRoadsPrioritization;
         [SerializeField] private CrossRoadsConfig[] _crossRoads;
         [SerializeField] private RoadSegmentConfig[] _roadSegments;
@@ -25,7 +25,6 @@ namespace GridLock.View
         private RoadNetwork _network;
         private float _spawnTimer;
         private float _levelTimer;
-        private readonly Dictionary<VehicleConfig.Type, VehicleConfig> _vehicleConfigsDict = new ();
         private bool _roundFinished;
         
         private void Start()
@@ -37,12 +36,7 @@ namespace GridLock.View
             _scoreUI.SetData(_simulationManager);
             _timerUI.SetData(_levelData.TimeLimit);
             
-            foreach (var vehicleConfig in _vehicleConfigs)
-            {
-                _vehicleConfigsDict.Add(vehicleConfig.VehicleType, vehicleConfig);
-            }
-            
-            _spawnManager = new SpawnManager(_network);
+            _spawnManager = new SpawnManager(_network, _vehicleMovementConfig);
             _spawnManager.OnVehicleReadyToSpawn += _simulationManager.AddVehicle;
             _vehicleViewFactory.Init(_network, _spawnManager);
         }
@@ -97,9 +91,7 @@ namespace GridLock.View
             if (_spawnTimer >= _levelData.GetSpawnIntervalForTime(_levelTimer))
             {
                 _spawnTimer = 0f;
-                VehicleConfig vehicleConfig = Random.value > _levelData.GetLorrySpawnProbabilityForTime(_levelTimer)
-                    ? _vehicleConfigsDict[VehicleConfig.Type.Car]
-                    : _vehicleConfigsDict[VehicleConfig.Type.Lorry];
+                VehicleConfig vehicleConfig = _levelData.GetRandomVehicleForTime(_levelTimer);
                 _spawnManager.QueueSpawn(vehicleConfig);
             }
         }

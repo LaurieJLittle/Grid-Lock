@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62ee03554c860947bff0c7f09fed2e3, type: 3}
   m_Name: LorryConfig
   m_EditorClassIdentifier: 
-  _vehicleType: 1
+  _id: 8
   _size: 2
-  _leftTurnTraversalTime: 2
-  _rightTurnTraversalTime: 3
-  _straightTraversalTime: 2.5
-  _speed: 2
   _centreToFrontDistance: 0.2
   _rotationSprites:
   - {fileID: 21300000, guid: ec01847bce30cbd44997309bbd43e69e, type: 3}

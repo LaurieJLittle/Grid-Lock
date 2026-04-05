@@ -335,7 +335,7 @@ namespace GridLock.View
             if (_vehicle.CurrentSegment != null)
             {
                 float worldLength = _roadNetworkView.GetSegmentWorldLength(_vehicle.CurrentSegment);
-                worldSpeed = _vehicle.VehicleConfig.Speed * worldLength / _vehicle.CurrentSegment.Capacity;
+                worldSpeed = _vehicle.MovementConfig.Speed * worldLength / _vehicle.CurrentSegment.Capacity;
             }
 
             float angle = _currentAngle * Mathf.Deg2Rad;

@@ -78,7 +78,7 @@ namespace GridLock.Simulation
                 
                 // Advance along road segment
                 float segmentLength = vehicle.CurrentSegment.Capacity;
-                float progressDelta = (vehicle.VehicleConfig.Speed * dt) / segmentLength;
+                float progressDelta = (vehicle.MovementConfig.Speed * dt) / segmentLength;
                 
                 float maxProgress = vehicle.CurrentSegment.GetMaxVehicleProgress(vehicle);
                 vehicle.SegmentProgress = Mathf.Min(vehicle.SegmentProgress + progressDelta, maxProgress);

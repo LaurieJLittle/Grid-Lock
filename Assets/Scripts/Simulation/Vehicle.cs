@@ -11,6 +11,7 @@ namespace GridLock.Simulation
         private readonly List<RouteStep> _route;
 
         public VehicleConfig VehicleConfig { get; }
+        public VehicleMovementConfig MovementConfig { get; }
         public int Id { get; }
         public VehicleState State { get; private set; }
         private int CurrentRouteIndex { get; set; }
@@ -29,11 +30,12 @@ namespace GridLock.Simulation
         public event Action<Vehicle, VehicleState> OnStateChanged;
         public event Action TripComplete;
 
-        public Vehicle(List<RouteStep> route, VehicleConfig vehicleConfig)
+        public Vehicle(List<RouteStep> route, VehicleConfig vehicleConfig, VehicleMovementConfig movementConfig)
         {
             Id = _nextId++;
             _route = route;
             VehicleConfig = vehicleConfig;
+            MovementConfig = movementConfig;
             State = VehicleState.TraversingRoadSegment;
             CurrentRouteIndex = 0;
         }
@@ -53,13 +55,13 @@ namespace GridLock.Simulation
             switch (turnDirection)
             {
                 case TurnDirection.Left:
-                    FullTraversalTime = VehicleConfig.LeftTurnTraversalTime;
+                    FullTraversalTime = MovementConfig.LeftTurnTraversalTime;
                     break;
                 case TurnDirection.Right:
-                    FullTraversalTime = VehicleConfig.RightTurnTraversalTime;
+                    FullTraversalTime = MovementConfig.RightTurnTraversalTime;
                     break;
                 case TurnDirection.Straight:
-                    FullTraversalTime = VehicleConfig.StraightTraversalTime;
+                    FullTraversalTime = MovementConfig.StraightTraversalTime;
                     break;
             }
 

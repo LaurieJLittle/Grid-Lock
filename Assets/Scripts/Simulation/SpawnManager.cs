@@ -11,6 +11,7 @@ namespace GridLock.Simulation
         private const float kSpawnHeadsUp = 1f;
 
         private readonly RoadNetwork _network;
+        private readonly VehicleMovementConfig _movementConfig;
         private readonly RouteProvider _routeProvider;
         private readonly Queue<PendingSpawn> _pendingSpawns = new Queue<PendingSpawn>();
         private float _nextSpawnCountdown;
@@ -19,9 +20,10 @@ namespace GridLock.Simulation
         public event Action<Vehicle, RoadSegment> OnVehicleReadyToSpawn;
         public event Action<RoadSegment> OnSpawnFailed;
 
-        public SpawnManager(RoadNetwork network)
+        public SpawnManager(RoadNetwork network, VehicleMovementConfig movementConfig)
         {
             _network = network;
+            _movementConfig = movementConfig;
             _routeProvider = new RouteProvider();
         }
 
@@ -86,7 +88,7 @@ namespace GridLock.Simulation
                 return;
             }
 
-            var vehicle = new Vehicle(route, pendingSpawn.VehicleConfig);
+            var vehicle = new Vehicle(route, pendingSpawn.VehicleConfig, _movementConfig);
             OnVehicleReadyToSpawn?.Invoke(vehicle, pendingSpawn.SpawnSegment);
         }
 

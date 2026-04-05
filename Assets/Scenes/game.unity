@@ -2581,9 +2581,7 @@ MonoBehaviour:
   _levelData: {fileID: 11400000, guid: ef9c002960352b64a8396fdee3b930d7, type: 2}
   _scoreUI: {fileID: 980029622}
   _timerUI: {fileID: 872940615}
-  _vehicleConfigs:
-  - {fileID: 11400000, guid: 0c214e8758b83154f814bfec08e28cc7, type: 2}
-  - {fileID: 11400000, guid: 4bf4a36e27c39ad46a0ed366f43df39c, type: 2}
+  _vehicleMovementConfig: {fileID: 11400000, guid: e27975a2819ddbc469cdb648c6a7278b, type: 2}
   _crossRoadsPrioritization: 1
   _crossRoads:
   - {fileID: 2014681335}

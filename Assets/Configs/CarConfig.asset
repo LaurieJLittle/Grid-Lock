@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62ee03554c860947bff0c7f09fed2e3, type: 3}
   m_Name: CarConfig
   m_EditorClassIdentifier: 
-  _vehicleType: 0
+  _id: 0
   _size: 1
-  _leftTurnTraversalTime: 1
-  _rightTurnTraversalTime: 2
-  _straightTraversalTime: 1.5
-  _speed: 2
   _centreToFrontDistance: 0.1
   _rotationSprites:
   - {fileID: 21300000, guid: 461fb857e636ebb49993b19c01a943da, type: 3}

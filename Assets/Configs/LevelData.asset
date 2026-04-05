@@ -15,5 +15,54 @@ MonoBehaviour:
   _timeLimit: 120
   _levelStartSpawnInterval: 1.4
   _levelEndSpawnIntervalSpawnInterval: 0.75
-  _levelStartLorrySpawnProbability: 0.2
-  _levelEndLorrySpawnProbability: 0.2
+  _vehicleSpawnEntries:
+  - VehicleConfig: {fileID: 11400000, guid: 0c214e8758b83154f814bfec08e28cc7, type: 2}
+    SpawnWeightOverTime:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - VehicleConfig: {fileID: 11400000, guid: 4bf4a36e27c39ad46a0ed366f43df39c, type: 2}
+    SpawnWeightOverTime:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
