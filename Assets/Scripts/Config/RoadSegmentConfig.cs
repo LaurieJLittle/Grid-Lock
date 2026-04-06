@@ -10,8 +10,6 @@ namespace GridLock.Config
         [SerializeField] private string _toCrossRoadsId;
         [SerializeField] private Direction _direction;
         [SerializeField] private int _capacity;
-        [SerializeField] private bool _isSpawnPoint;
-        [SerializeField] private bool _isExitPoint;
 
         public string Id => _id;
 
@@ -24,8 +22,6 @@ namespace GridLock.Config
                 ToCrossRoadsId = _toCrossRoadsId.GetHashCode(),
                 Direction = _direction,
                 Capacity = _capacity,
-                IsSpawnPoint = _isSpawnPoint,
-                IsExitPoint = _isExitPoint,
             };
         }
     }
@@ -37,7 +33,5 @@ namespace GridLock.Config
         public int ToCrossRoadsId;
         public Direction Direction;
         public int Capacity;
-        public bool IsSpawnPoint;
-        public bool IsExitPoint;
     }
 }

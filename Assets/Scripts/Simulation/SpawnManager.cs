@@ -80,7 +80,14 @@ namespace GridLock.Simulation
                 return;
             }
 
-            List<RouteStep> route = _routeProvider.FindRoute(pendingSpawn.SpawnSegment, _network.ExitSegments.RandomItem());
+            if (!_network.ExitSegments.TryGetValue(pendingSpawn.VehicleConfig.Id, out var exitSegment))
+            {
+                Debug.LogError($"No exit configured for vehicle type {pendingSpawn.VehicleConfig.Id}");
+                OnSpawnFailed?.Invoke(pendingSpawn.SpawnSegment);
+                return;
+            }
+
+            List<RouteStep> route = _routeProvider.FindRoute(pendingSpawn.SpawnSegment, exitSegment);
             if (route == null || route.Count == 0)
             {
                 Debug.LogWarning($"No valid route from segment {pendingSpawn.SpawnSegment.Id}");

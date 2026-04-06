@@ -19,6 +19,8 @@ namespace GridLock.View
         [SerializeField] private CrossRoadsPrioritization _crossRoadsPrioritization;
         [SerializeField] private CrossRoadsConfig[] _crossRoads;
         [SerializeField] private RoadSegmentConfig[] _roadSegments;
+        [SerializeField] private SpawnPointConfig[] _spawnPoints;
+        [SerializeField] private ExitPointConfig[] _exitPoints;
         
         private SimulationManager _simulationManager;
         private SpawnManager _spawnManager;
@@ -63,6 +65,16 @@ namespace GridLock.View
             
             _network = new RoadNetwork();
             _network.Build(networkLayoutData);
+
+            foreach (var spawnPoint in _spawnPoints)
+            {
+                _network.RegisterSpawnPoint(spawnPoint.RoadSegment.Id.GetHashCode());
+            }
+
+            foreach (var exitPoint in _exitPoints)
+            {
+                _network.RegisterExitPoint(exitPoint.RoadSegment.Id.GetHashCode(), exitPoint.VehicleId);
+            }
         }
 
         private void FixedUpdate()

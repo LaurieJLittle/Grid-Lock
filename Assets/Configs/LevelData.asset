@@ -16,7 +16,7 @@ MonoBehaviour:
   _levelStartSpawnInterval: 1.4
   _levelEndSpawnIntervalSpawnInterval: 0.75
   _vehicleSpawnEntries:
-  - VehicleConfig: {fileID: 11400000, guid: 0c214e8758b83154f814bfec08e28cc7, type: 2}
+  - VehicleConfig: {fileID: 11400000, guid: f22bf3d68f65ac64d896186d5db28688, type: 2}
     SpawnWeightOverTime:
       serializedVersion: 2
       m_Curve:
@@ -59,6 +59,56 @@ MonoBehaviour:
         value: 1
         inSlope: 1
         outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - VehicleConfig: {fileID: 11400000, guid: 0c214e8758b83154f814bfec08e28cc7, type: 2}
+    SpawnWeightOverTime:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - VehicleConfig: {fileID: 11400000, guid: c35b2a5e661fb8047ba433433e3c6d18, type: 2}
+    SpawnWeightOverTime:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0

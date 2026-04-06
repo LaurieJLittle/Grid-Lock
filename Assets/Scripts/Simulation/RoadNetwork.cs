@@ -13,12 +13,12 @@ namespace GridLock.Simulation
         private readonly Dictionary<int, CrossRoads> _crossRoads = new Dictionary<int, CrossRoads>();
         private readonly Dictionary<int, RoadSegment> _segments = new Dictionary<int, RoadSegment>();
         private readonly List<RoadSegment> _spawnSegments = new List<RoadSegment>();
-        private readonly List<RoadSegment> _exitSegments = new List<RoadSegment>();
+        private readonly Dictionary<VehicleId, RoadSegment> _exitSegments = new Dictionary<VehicleId, RoadSegment>();
 
         public Dictionary<int, CrossRoads> CrossRoads => _crossRoads;
         public Dictionary<int, RoadSegment> Segments => _segments;
         public List<RoadSegment> SpawnSegments => _spawnSegments;
-        public List<RoadSegment> ExitSegments => _exitSegments;
+        public Dictionary<VehicleId, RoadSegment> ExitSegments => _exitSegments;
 
         public void Build(NetworkLayoutData networkLayoutData)
         {
@@ -40,16 +40,6 @@ namespace GridLock.Simulation
                 var segment = new RoadSegment(data.Id, data.Capacity, data.Direction);
                 _segments[data.Id] = segment;
 
-                if (data.IsSpawnPoint)
-                {
-                    _spawnSegments.Add(segment);
-                }
-
-                if (data.IsExitPoint)
-                {
-                    _exitSegments.Add(segment);
-                }
-
                 if (_crossRoads.TryGetValue(data.FromCrossRoadsId, out var fromCrossRoads))
                 {
                     segment.FromCrossRoads = fromCrossRoads;
@@ -61,6 +51,22 @@ namespace GridLock.Simulation
                     segment.ToCrossRoads = toCrossRoads;
                     toCrossRoads.InboundRoads[data.Direction] = segment;
                 }
+            }
+        }
+
+        public void RegisterSpawnPoint(int segmentId)
+        {
+            if (_segments.TryGetValue(segmentId, out var segment))
+            {
+                _spawnSegments.Add(segment);
+            }
+        }
+
+        public void RegisterExitPoint(int segmentId, VehicleId vehicleId)
+        {
+            if (_segments.TryGetValue(segmentId, out var segment))
+            {
+                _exitSegments[vehicleId] = segment;
             }
         }
 

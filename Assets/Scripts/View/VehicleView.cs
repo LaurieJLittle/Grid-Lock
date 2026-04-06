@@ -20,7 +20,10 @@ namespace GridLock.View
         [SerializeField] private float _previewPulseFrequency = 4f;
         [SerializeField] private float _previewPulseAlphaMin = 0.3f;
         [SerializeField] private float _previewPulseAlphaMax = 0.7f;
-        [SerializeField] private float _spawnFailedDisplayDuration = 0.5f;
+        [SerializeField] private float _spawnFailedDuration = 0.5f;
+        [SerializeField] private float _spawnFailedShakeIntensity = 0.05f;
+        [SerializeField] private float _spawnFailedShakeFrequency = 30f;
+        [SerializeField] private SpriteRenderer _spawnFailedIcon;
         [SerializeField] private float _exitFadeDuration = 0.5f;
         [SerializeField] private float _compressedIndicatorAxisScale = 0.5f;
         [SerializeField] private float _regularIndicatorAxisScale = 1f;
@@ -113,8 +116,29 @@ namespace GridLock.View
 
         private IEnumerator SpawnFailedAnimation()
         {
-            _spriteRenderer.color = new Color(1f, 0f, 0f, 0.5f);
-            yield return new WaitForSeconds(_spawnFailedDisplayDuration);
+            _spawnFailedIcon.gameObject.SetActive(true);
+            Vector3 originalPosition = transform.position;
+            float elapsed = 0f;
+
+            while (elapsed < _spawnFailedDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / _spawnFailedDuration;
+                float shake = Mathf.Sin(elapsed * _spawnFailedShakeFrequency * Mathf.PI * 2f) * _spawnFailedShakeIntensity * (1f - t);
+                transform.position = originalPosition + new Vector3(shake, 0f, 0f);
+
+                float alpha = 1f - t;
+                Color c = _spriteRenderer.color;
+                c.a = alpha;
+                _spriteRenderer.color = c;
+
+                Color ic = _spawnFailedIcon.color;
+                ic.a = alpha;
+                _spawnFailedIcon.color = ic;
+
+                yield return null;
+            }
+
             Destroy(gameObject);
         }
 
