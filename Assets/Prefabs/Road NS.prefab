@@ -83,8 +83,6 @@ MonoBehaviour:
   _toCrossRoadsId: 
   _direction: 3
   _capacity: 3
-  _isSpawnPoint: 0
-  _isExitPoint: 0
 --- !u!114 &1668126159581576302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +98,6 @@ MonoBehaviour:
   _roadSegmentConfig: {fileID: 5160831489512022149}
   _roadStart: {fileID: 8773888974859476998}
   _roadEnd: {fileID: 5106219660802025634}
-  _spawnIndicator: {fileID: 0}
 --- !u!1 &5558831369741641796
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +158,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -277,8 +274,6 @@ MonoBehaviour:
   _toCrossRoadsId: 
   _direction: 1
   _capacity: 3
-  _isSpawnPoint: 0
-  _isExitPoint: 0
 --- !u!114 &6340046744190858009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +289,6 @@ MonoBehaviour:
   _roadSegmentConfig: {fileID: 1998007339292183336}
   _roadStart: {fileID: 7228355227994185589}
   _roadEnd: {fileID: 3828202993106996901}
-  _spawnIndicator: {fileID: 0}
 --- !u!1 &7273189792915694801
 GameObject:
   m_ObjectHideFlags: 0
