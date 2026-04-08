@@ -150,7 +150,7 @@ MonoBehaviour:
   _spawnFailedShakeIntensity: 0.04
   _spawnFailedShakeFrequency: 10
   _spawnFailedIcon: {fileID: 3011744520167277174}
-  _exitFadeDuration: 0.5
+  _exitFadeDuration: 1
   _compressedIndicatorAxisScale: 0.33333334
   _regularIndicatorAxisScale: 0.5
   _indicatorForwardOffset: 0.08
