@@ -417,7 +417,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.25649688, g: 0.69293463, b: 0.8238993, a: 1}
+  m_BackGroundColor: {r: 0.08480305, g: 0.050907798, b: 0.49056602, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -939,6 +939,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6445558154851320117, guid: bfb6a241084dd4140bcd1376d42e52ee, type: 3}
   m_PrefabInstance: {fileID: 527404212}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &545764629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 545764631}
+  - component: {fileID: 545764630}
+  m_Layer: 0
+  m_Name: ScoreParticleFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &545764630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545764629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea821e0e8776af4990ea2036d2eaf0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridLock.View.ScoreParticleFactory
+  _scoreParticlePrefab: {fileID: 7547340714640944979, guid: c11affbf8f6af7c45832e95e3d4fc728, type: 3}
+  _materialVariants:
+  - vehicleId: 0
+    material: {fileID: 2100000, guid: e0e9501055b8b564d9f4ffc295850dd0, type: 2}
+  - vehicleId: 8
+    material: {fileID: 2100000, guid: 4fbaec02aa17165439e72cae6cf858e1, type: 2}
+  - vehicleId: 5
+    material: {fileID: 2100000, guid: 5592ccbe22ebf474c92cedef0bdf038e, type: 2}
+  - vehicleId: 3
+    material: {fileID: 2100000, guid: 2c49239343daaa44a86d84187fc97ec8, type: 2}
+--- !u!4 &545764631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545764629}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.19629, y: 0.33909, z: -0.85243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &570926912 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6204806463836218332, guid: 838bc99e28d87c649942430567abffe3, type: 3}
@@ -2251,6 +2305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 980029620}
+  _punchScaleDuration: 0.2
+  _punchScaleAmount: 1.3
 --- !u!114 &988485251 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1639846353217137835, guid: 838bc99e28d87c649942430567abffe3, type: 3}
@@ -2273,6 +2329,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43a592e1af7384c813562215f0637a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1010195305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1010195307}
+  - component: {fileID: 1010195306}
+  m_Layer: 0
+  m_Name: RoundViewManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1010195306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010195305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6abe0de648925c4fbfbd2b2160f55ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridLock.View.VisualManager
+  _vehicleViewFactory: {fileID: 1472293485}
+  _roadNetworkView: {fileID: 2080176000}
+  _scoreUI: {fileID: 980029622}
+  _timerUI: {fileID: 872940615}
+  _scoreParticleFactory: {fileID: 545764630}
+--- !u!4 &1010195307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010195305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.19629, y: 0.33909, z: -0.85243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1042362602
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,11 +3106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed06587d8f1c5a41a45512f12d03b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _networkView: {fileID: 2080176000}
-  _vehicleViewFactory: {fileID: 1472293485}
+  _roundViewManager: {fileID: 1010195306}
   _levelData: {fileID: 11400000, guid: ef9c002960352b64a8396fdee3b930d7, type: 2}
-  _scoreUI: {fileID: 980029622}
-  _timerUI: {fileID: 872940615}
   _vehicleMovementConfig: {fileID: 11400000, guid: e27975a2819ddbc469cdb648c6a7278b, type: 2}
   _crossRoadsPrioritization: 1
   _crossRoads:
@@ -4859,3 +4961,5 @@ SceneRoots:
   - {fileID: 2080175999}
   - {fileID: 2133363665}
   - {fileID: 1472293486}
+  - {fileID: 1010195307}
+  - {fileID: 545764631}

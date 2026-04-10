@@ -11,9 +11,12 @@ namespace GridLock.View
         [SerializeField] private RoadNetworkView _networkView;
 
         private readonly Queue<VehicleView> _previewVehicles = new Queue<VehicleView>();
+        private RoundViewManager _roundViewManager;
 
-        public void Init(RoadNetwork network, SpawnManager spawnManager)
+        public void Init(RoadNetwork network, SpawnManager spawnManager, RoundViewManager roundViewManager)
         {
+            _roundViewManager = roundViewManager;
+
             foreach (var segment in network.SpawnSegments)
             {
                 segment.OnSpawnPending += (time, config) => CreatePreview(config, segment);
@@ -27,12 +30,12 @@ namespace GridLock.View
             if (_previewVehicles.Count > 0)
             {
                 VehicleView preview = _previewVehicles.Dequeue();
-                preview.ActivateFromPreview(vehicle, _networkView);
+                preview.ActivateFromPreview(vehicle, _networkView, _roundViewManager);
             }
             else
             {
                 VehicleView vehicleView = Instantiate(_vehicleViewPrefab);
-                vehicleView.SetData(vehicle, _networkView);
+                vehicleView.SetData(vehicle, _networkView, _roundViewManager);
             }
         }
 

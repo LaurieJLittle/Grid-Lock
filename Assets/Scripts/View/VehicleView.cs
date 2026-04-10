@@ -31,6 +31,7 @@ namespace GridLock.View
 
         private Vehicle _vehicle;
         private RoadNetworkView _roadNetworkView;
+        private RoundViewManager _roundViewManager;
         private Sprite[] _rotationSprites;
 
         private float _targetAngle;
@@ -50,11 +51,12 @@ namespace GridLock.View
             _sinCameraElevation = Mathf.Sin(kCameraElevationDeg * Mathf.Deg2Rad);
         }
 
-        public void SetData(Vehicle targetVehicle, RoadNetworkView roadNetworkView)
+        public void SetData(Vehicle targetVehicle, RoadNetworkView roadNetworkView, RoundViewManager roundViewManager)
         {
             _vehicle = targetVehicle;
             _vehicle.TripComplete += OnTripComplete;
             _roadNetworkView = roadNetworkView;
+            _roundViewManager = roundViewManager;
             _rotationSprites = _vehicle.VehicleConfig.RotationSprites;
             _vehicle.OnStateChanged += OnVehicleStateChanged;
 
@@ -77,7 +79,7 @@ namespace GridLock.View
             _previewCoroutine = StartCoroutine(PulsePreview());
         }
 
-        public void ActivateFromPreview(Vehicle vehicle, RoadNetworkView roadNetworkView)
+        public void ActivateFromPreview(Vehicle vehicle, RoadNetworkView roadNetworkView, RoundViewManager roundViewManager)
         {
             if (_previewCoroutine != null)
             {
@@ -86,7 +88,7 @@ namespace GridLock.View
             }
 
             _spriteRenderer.color = Color.white;
-            SetData(vehicle, roadNetworkView);
+            SetData(vehicle, roadNetworkView, roundViewManager);
         }
 
         public void ShowSpawnFailed()
@@ -352,6 +354,11 @@ namespace GridLock.View
         {
             _vehicle.TripComplete -= OnTripComplete;
             _vehicle.OnStateChanged -= OnVehicleStateChanged;
+
+            if (_roundViewManager != null)
+            {
+                _roundViewManager.SpawnScoreParticle(transform.position, _vehicle.VehicleConfig.Id, 1);
+            }
 
             _isFadingOut = true;
 
