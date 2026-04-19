@@ -36,6 +36,7 @@ namespace GridLock.Simulation
             _activeVehicles.Add(vehicle);
             OnVehicleSpawned?.Invoke(vehicle);
         }
+        
         public void UpdateSimulation(float dt)
         {
             ProcessCrossRoadsTraversals(dt);
@@ -53,9 +54,10 @@ namespace GridLock.Simulation
                     continue;
                 }
 
-                vehicle.CrossroadsTraversalTimeLeft -= dt;
+                float progressDelta = (vehicle.MovementConfig.Speed * dt) / vehicle.CurrentDistance;
+                vehicle.Progress = Mathf.Min(vehicle.Progress + progressDelta, 1f);
 
-                if (vehicle.CrossroadsTraversalTimeLeft <= 0f)
+                if (vehicle.Progress >= 1f)
                 {
                     CompleteTraversal(vehicle);
                 }
@@ -77,16 +79,15 @@ namespace GridLock.Simulation
                 }
                 
                 // Advance along road segment
-                float segmentLength = vehicle.CurrentSegment.Capacity;
-                float progressDelta = (vehicle.MovementConfig.Speed * dt) / segmentLength;
-                
+                float progressDelta = (vehicle.MovementConfig.Speed * dt) / vehicle.CurrentDistance;
+
                 float maxProgress = vehicle.CurrentSegment.GetMaxVehicleProgress(vehicle);
-                vehicle.SegmentProgress = Mathf.Min(vehicle.SegmentProgress + progressDelta, maxProgress);
+                vehicle.Progress = Mathf.Min(vehicle.Progress + progressDelta, maxProgress);
 
                 // Try enter crossroads at end of roadSegment
-                if (vehicle.SegmentProgress >= 1f)
+                if (vehicle.Progress >= 1f)
                 {
-                    vehicle.SegmentProgress = 1f;
+                    vehicle.Progress = 1f;
                     RequestCrossRoadsEntry(vehicle);
                 }
             }

@@ -322,7 +322,7 @@ namespace GridLock.View
                 startPosition -= dir * offsetMagnitude;
                 endPosition -= dir * offsetMagnitude;
                 
-                progress = _vehicle.SegmentProgress;
+                progress = _vehicle.Progress;
                 _hasBezierPath = false;
                 return true;
             }
@@ -337,7 +337,7 @@ namespace GridLock.View
                 startPosition += _crossRoadsStartOffset;
                 endPosition += _crossRoadsEndOffset;
                 
-                progress = (_vehicle.FullTraversalTime - _vehicle.CrossroadsTraversalTimeLeft) / _vehicle.FullTraversalTime;
+                progress = _vehicle.Progress;
                 _hasBezierPath = _vehicle.GetNextStep().Turn != TurnDirection.Straight;
                 return true;
             }

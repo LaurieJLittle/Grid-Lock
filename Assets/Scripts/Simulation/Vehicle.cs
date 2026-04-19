@@ -16,16 +16,12 @@ namespace GridLock.Simulation
         public VehicleState State { get; private set; }
         private int CurrentRouteIndex { get; set; }
 
-        // Properties used when traversing RoadSegments
         public RoadSegment CurrentSegment { get; private set; } // null if on crossroads
-        // From 0 to 1
-        public float SegmentProgress { get; set; }
-
-
-        // Properties used when traversing CrossRoads
         public CrossRoads TraversingCrossRoads { get; private set; } // null if on road segment
-        public float FullTraversalTime { get; private set; }
-        public float CrossroadsTraversalTimeLeft { get; set; }
+
+        // Unified traversal progress (0 to 1) and distance for both road segments and crossroads
+        public float Progress { get; set; }
+        public float CurrentDistance { get; private set; }
 
         public event Action<Vehicle, VehicleState> OnStateChanged;
         public event Action TripComplete;
@@ -44,7 +40,8 @@ namespace GridLock.Simulation
         {
             CurrentSegment = segment;
             TraversingCrossRoads = null;
-            SegmentProgress = 0f;
+            Progress = 0f;
+            CurrentDistance = segment.Capacity;
         }
 
         public void BeginTraversal(CrossRoads CrossRoads, TurnDirection turnDirection)
@@ -55,17 +52,20 @@ namespace GridLock.Simulation
             switch (turnDirection)
             {
                 case TurnDirection.Left:
-                    FullTraversalTime = MovementConfig.LeftTurnTraversalTime;
+                    CurrentDistance = MovementConfig.LeftTurnDistance;
                     break;
                 case TurnDirection.Right:
-                    FullTraversalTime = MovementConfig.RightTurnTraversalTime;
+                    CurrentDistance = MovementConfig.RightTurnDistance;
                     break;
                 case TurnDirection.Straight:
-                    FullTraversalTime = MovementConfig.StraightTraversalTime;
+                    CurrentDistance = MovementConfig.StraightDistance;
+                    break;
+                default:
+                    CurrentDistance = MovementConfig.StraightDistance;
                     break;
             }
 
-            CrossroadsTraversalTimeLeft = FullTraversalTime;
+            Progress = 0f;
             SetState(VehicleState.TraversingCrossRoads);
         }
 
