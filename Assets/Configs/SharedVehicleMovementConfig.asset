@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5c2284120cda94c8c33ce1ccc9c1e0, type: 3}
   m_Name: SharedVehicleMovementConfig
   m_EditorClassIdentifier: Assembly-CSharp::GridLock.Config.VehicleMovementConfig
-  _leftTurnTraversalTime: 2
-  _rightTurnTraversalTime: 3
-  _straightTraversalTime: 2.5
-  _speed: 1.5
+  _leftTurnTraversalTime: 1.5
+  _rightTurnTraversalTime: 2.25
+  _straightTraversalTime: 1.875
+  _speed: 2

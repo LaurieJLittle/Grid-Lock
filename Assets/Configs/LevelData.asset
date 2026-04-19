@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4036d3521b2420049b871c716d0656d9, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  _timeLimit: 120
-  _levelStartSpawnInterval: 1.4
-  _levelEndSpawnIntervalSpawnInterval: 0.75
+  _timeLimit: 75
+  _levelStartSpawnInterval: 1.8
+  _levelEndSpawnIntervalSpawnInterval: 0.8
   _vehicleSpawnEntries:
   - VehicleConfig: {fileID: 11400000, guid: f22bf3d68f65ac64d896186d5db28688, type: 2}
     SpawnWeightOverTime:

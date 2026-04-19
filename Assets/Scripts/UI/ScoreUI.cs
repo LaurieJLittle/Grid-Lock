@@ -15,6 +15,20 @@ namespace GridLock.UI
         private int _displayScore; // incremented on particles hitting the ScoreUI, to give nice visual feedback.
         private SimulationManager _simulationManager;
         private Coroutine _punchCoroutine;
+        private RectTransform _rectTransform;
+        private Vector2 _originalAnchoredPosition;
+        private Vector2 _originalAnchorMin;
+        private Vector2 _originalAnchorMax;
+        private Vector2 _originalPivot;
+
+        private void Awake()
+        {
+            _rectTransform = GetComponent<RectTransform>();
+            _originalAnchoredPosition = _rectTransform.anchoredPosition;
+            _originalAnchorMin = _rectTransform.anchorMin;
+            _originalAnchorMax = _rectTransform.anchorMax;
+            _originalPivot = _rectTransform.pivot;
+        }
 
         public void SetData(SimulationManager simulationManager)
         {
@@ -46,6 +60,24 @@ namespace GridLock.UI
                 StopCoroutine(_punchCoroutine);
             }
             _punchCoroutine = StartCoroutine(PunchScale());
+        }
+
+        public void ShiftToCentre()
+        {
+            _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            _rectTransform.pivot = new Vector2(0.5f, 0.5f);
+            _rectTransform.anchoredPosition = Vector2.zero;
+            _scoreText.alignment = TextAlignmentOptions.Center;
+        }
+
+        public void ResetPosition()
+        {
+            _rectTransform.anchorMin = _originalAnchorMin;
+            _rectTransform.anchorMax = _originalAnchorMax;
+            _rectTransform.pivot = _originalPivot;
+            _rectTransform.anchoredPosition = _originalAnchoredPosition;
+            _scoreText.alignment = TextAlignmentOptions.Right;
         }
 
         private IEnumerator PunchScale()

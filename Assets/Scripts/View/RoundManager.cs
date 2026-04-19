@@ -3,6 +3,7 @@ using GridLock.Config;
 using GridLock.Core;
 using GridLock.Simulation;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace GridLock.View
@@ -104,8 +105,11 @@ namespace GridLock.View
         {
             _roundFinished = true;
             _roundViewManager.OnRoundFinished();
+        }
 
-            // LL TODO - Add gameover sequence here
+        public void Retry()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

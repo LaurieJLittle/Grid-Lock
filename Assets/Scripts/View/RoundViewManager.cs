@@ -12,6 +12,7 @@ namespace GridLock.View
         [SerializeField] private ScoreUI _scoreUI;
         [SerializeField] private TimerUI _timerUI;
         [SerializeField] private ScoreParticleFactory _scoreParticleFactory;
+        [SerializeField] private Transform _gameOverUI;
         
         private Camera _mainCamera;
 
@@ -23,6 +24,8 @@ namespace GridLock.View
             _scoreUI.SetData(simulationManager);
             _timerUI.SetData(timeLimit);
             _vehicleViewFactory.Init(network, spawnManager, this);
+            _scoreUI.ResetPosition();
+            _gameOverUI.gameObject.SetActive(false);
         }
 
         public void SpawnScoreParticle(Vector3 sourceWorldPosition, VehicleId vehicleId, int pointsToAward)
@@ -40,6 +43,8 @@ namespace GridLock.View
         public void OnRoundFinished()
         {
             _timerUI.Hide();
+            _scoreUI.ShiftToCentre();
+            _gameOverUI.gameObject.SetActive(true);
         }
     }
 }
