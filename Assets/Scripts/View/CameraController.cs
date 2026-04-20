@@ -9,8 +9,8 @@ namespace GridLock.View
         [SerializeField] private float _padding = 0.5f;
         [SerializeField] private List<Transform> _environmentTransforms;
         
-        private Vector2 _minXY;
-        private Vector2 _maxXY;
+        private Vector2 _minXY = new Vector2(float.MaxValue, float.MaxValue);
+        private Vector2 _maxXY = new Vector2(float.MinValue, float.MinValue);
         private Camera _cam;
         
         private void Start()
