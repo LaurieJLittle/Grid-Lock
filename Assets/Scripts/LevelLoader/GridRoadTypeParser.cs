@@ -18,7 +18,7 @@ namespace GridLock.LevelLoader
         public List<Vector2Int> ExitCells = new List<Vector2Int>();
     }
 
-    public static class GridAnalyzer
+    public static class GridRoadTypeParser
     {
         private static readonly Vector2Int[] kNeighbouringCells =
             { Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down };

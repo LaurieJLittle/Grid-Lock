@@ -16,7 +16,7 @@ namespace GridLock.LevelLoader
             string[] firstRow = lines[0].Split(',');
             int colCount = firstRow.Length;
 
-            var grid = new int[rowCount, colCount];
+            var grid = new int[colCount, rowCount];
 
             for (int row = 0; row < rowCount; row++)
             {
@@ -39,7 +39,7 @@ namespace GridLock.LevelLoader
                         throw new ArgumentException($"Value {value} out of range (0-4) at row {row}, col {col}");
                     }
 
-                    grid[row, col] = value;
+                    grid[col, row] = value;
                 }
             }
 
