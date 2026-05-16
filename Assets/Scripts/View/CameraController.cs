@@ -13,24 +13,35 @@ namespace GridLock.View
         private Vector2 _maxXY = new Vector2(float.MinValue, float.MinValue);
         private Camera _cam;
         
-        private void Start()
+        private void Awake()
         {
             _cam = GetComponent<Camera>();
+        }
 
+        private void Start()
+        {
             if (_environmentTransforms.Count == 0)
             {
                 return;
             }
-            
-            foreach (var environmentTransform in _environmentTransforms)
+
+            FitToTransforms(_environmentTransforms);
+        }
+
+        public void FitToTransforms(IReadOnlyList<Transform> transforms)
+        {
+            _minXY = new Vector2(float.MaxValue, float.MaxValue);
+            _maxXY = new Vector2(float.MinValue, float.MinValue);
+
+            foreach (var t in transforms)
             {
-                _minXY.x = Mathf.Min(environmentTransform.position.x, _minXY.x);
-                _minXY.y = Mathf.Min(environmentTransform.position.y, _minXY.y);
-                
-                _maxXY.x = Mathf.Max(environmentTransform.position.x, _maxXY.x);
-                _maxXY.y = Mathf.Max(environmentTransform.position.y, _maxXY.y);
+                _minXY.x = Mathf.Min(t.position.x, _minXY.x);
+                _minXY.y = Mathf.Min(t.position.y, _minXY.y);
+
+                _maxXY.x = Mathf.Max(t.position.x, _maxXY.x);
+                _maxXY.y = Mathf.Max(t.position.y, _maxXY.y);
             }
-            
+
             UpdateBounds();
         }
 

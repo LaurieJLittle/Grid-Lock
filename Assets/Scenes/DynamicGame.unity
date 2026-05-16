@@ -1493,6 +1493,7 @@ MonoBehaviour:
   _roundViewManager: {fileID: 1010195306}
   _levelViewBuilder: {fileID: 2080176001}
   _roadNetworkView: {fileID: 2080176000}
+  _cameraController: {fileID: 330585548}
 --- !u!1 &1472293484
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ namespace GridLock.LevelLoader
         [SerializeField] private RoundViewManager _roundViewManager;
         [SerializeField] private LevelViewBuilder _levelViewBuilder;
         [SerializeField] private RoadNetworkView _roadNetworkView;
+        [SerializeField] private CameraController _cameraController;
 
         private SimulationManager _simulationManager;
         private SpawnManager _spawnManager;
@@ -60,6 +61,16 @@ namespace GridLock.LevelLoader
 
             int rowCount = grid.GetLength(1);
             _levelViewBuilder.BuildViews(buildData, rowCount, _roadNetworkView, analysis);
+
+            if (_cameraController != null)
+            {
+                var transforms = new List<Transform>();
+                foreach (Transform child in _levelViewBuilder.transform)
+                {
+                    transforms.Add(child);
+                }
+                _cameraController.FitToTransforms(transforms);
+            }
         }
 
         private void FixedUpdate()
