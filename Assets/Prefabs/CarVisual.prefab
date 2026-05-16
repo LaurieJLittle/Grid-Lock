@@ -140,9 +140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 733441355314397985}
   _turnIndicator: {fileID: 4332521556742897368}
-  _leftTurnSprite: {fileID: 21300000, guid: 6339deaab73d05f4c849b1c94554ad2b, type: 3}
-  _straightTurnSprite: {fileID: 21300000, guid: 15a0a63be4432bf49b8c4c4de46696ce, type: 3}
-  _rightTurnSprite: {fileID: 21300000, guid: 3ab2bfb3e377c344ea18d50c7c409dbd, type: 3}
+  _leftTurnSprite: {fileID: 21300000, guid: 558d504682e42dc4fbc47875c2c182b4, type: 3}
+  _straightTurnSprite: {fileID: 21300000, guid: 1e51825f740a0b74996fae73bb1461ca, type: 3}
+  _rightTurnSprite: {fileID: 21300000, guid: b61106045698c8d419883500301d132a, type: 3}
   _previewPulseFrequency: 4
   _previewPulseAlphaMin: 0.3
   _previewPulseAlphaMax: 0.7

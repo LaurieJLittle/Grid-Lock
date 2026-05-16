@@ -15,6 +15,12 @@ namespace GridLock.View
         private readonly Dictionary<RoadSegment, RoadSegmentView> _roadViewLookUp = new Dictionary<RoadSegment, RoadSegmentView>();
         private readonly Dictionary<CrossRoads, CrossRoadView> _crossRoadsViewLookUp = new Dictionary<CrossRoads, CrossRoadView>();
         
+        public void SetViews(CrossRoadView[] crossRoads, RoadSegmentView[] segments)
+        {
+            _crossRoadsViews = crossRoads;
+            _roadSegmentViews = segments;
+        }
+
         public void Init(RoadNetwork network)
         {
             foreach (var crossRoadView in _crossRoadsViews)

@@ -9,12 +9,18 @@ namespace GridLock.View
         [SerializeField] private RoadSegmentConfig _roadSegmentConfig;
         [SerializeField] private Transform _roadStart;
         [SerializeField] private Transform _roadEnd;
+        [SerializeField] private int _overrideId = int.MinValue;
 
-        public int Id => _roadSegmentConfig.Id.GetHashCode();
+        public int Id => _overrideId != int.MinValue ? _overrideId : _roadSegmentConfig.Id.GetHashCode();
         public Vector3 RoadStartPosition => _roadStart.position;
         public Vector3 RoadEndPosition => _roadEnd.position;
         public float WorldLength { get; private set; }
         public Vector3 ForwardDirection { get; private set; }
+
+        public void SetIdOverride(int id)
+        {
+            _overrideId = id;
+        }
 
         public void BindToNetwork(RoadSegment roadSegment)
         {

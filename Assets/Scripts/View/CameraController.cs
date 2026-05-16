@@ -16,6 +16,12 @@ namespace GridLock.View
         private void Start()
         {
             _cam = GetComponent<Camera>();
+
+            if (_environmentTransforms.Count == 0)
+            {
+                return;
+            }
+            
             foreach (var environmentTransform in _environmentTransforms)
             {
                 _minXY.x = Mathf.Min(environmentTransform.position.x, _minXY.x);

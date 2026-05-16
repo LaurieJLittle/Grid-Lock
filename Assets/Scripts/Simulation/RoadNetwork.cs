@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GridLock.Config;
 using GridLock.Core;
@@ -67,6 +68,31 @@ namespace GridLock.Simulation
             if (_segments.TryGetValue(segmentId, out var segment))
             {
                 _exitSegments[vehicleId] = segment;
+            }
+        }
+
+        public void RegisterExitPointForAllVehicles(int segmentId)
+        {
+            if (!_segments.TryGetValue(segmentId, out var segment))
+            {
+                return;
+            }
+
+            foreach (VehicleId vehicleId in Enum.GetValues(typeof(VehicleId)))
+            {
+                _exitSegments[vehicleId] = segment;
+            }
+        }
+
+        public void DistributeExitPoints(List<int> exitSegmentIds, List<VehicleId> vehicleIds)
+        {
+            for (int i = 0; i < vehicleIds.Count; i++)
+            {
+                int exitIndex = i % exitSegmentIds.Count;
+                if (_segments.TryGetValue(exitSegmentIds[exitIndex], out var segment))
+                {
+                    _exitSegments[vehicleIds[i]] = segment;
+                }
             }
         }
 

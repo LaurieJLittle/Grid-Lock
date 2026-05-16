@@ -14,6 +14,7 @@ namespace GridLock.Config
         [SerializeField] private List<VehicleSpawnEntry> _vehicleSpawnEntries;
 
         public float TimeLimit => _timeLimit; // in seconds
+        public List<VehicleSpawnEntry> VehicleSpawnEntries => _vehicleSpawnEntries;
 
         public float GetSpawnIntervalForTime(float time)
         {

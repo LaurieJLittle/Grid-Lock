@@ -15,8 +15,14 @@ namespace GridLock.View
         [SerializeField] private SpriteRenderer[] _northSouthIndicators;
         
         private CrossRoads _crossRoads;
+        private int _overrideId = int.MinValue;
 
-        public int Id => _crossRoadsConfig.Id.GetHashCode();
+        public int Id => _overrideId != int.MinValue ? _overrideId : _crossRoadsConfig.Id.GetHashCode();
+
+        public void SetIdOverride(int id)
+        {
+            _overrideId = id;
+        }
         
         public void BindToNetwork(CrossRoads crossRoads)
         {
