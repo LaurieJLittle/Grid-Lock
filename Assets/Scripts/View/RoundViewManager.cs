@@ -16,7 +16,7 @@ namespace GridLock.View
         
         private Camera _mainCamera;
 
-        public void Init(SimulationManager simulationManager, SpawnManager spawnManager, RoadNetwork network, float timeLimit)
+        public void Init(SimulationManager simulationManager, SpawnManager spawnManager, IReadOnlyRoadNetwork network, float timeLimit)
         {
             _mainCamera = Camera.main;
             _roadNetworkView.Init(network);

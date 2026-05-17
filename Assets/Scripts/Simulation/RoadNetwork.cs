@@ -5,11 +5,20 @@ using GridLock.Core;
 
 namespace GridLock.Simulation
 {
+    public interface IReadOnlyRoadNetwork
+    {
+        IReadOnlyDictionary<int, CrossRoads> CrossRoads { get; }
+        IReadOnlyDictionary<int, RoadSegment> Segments { get; }
+        IReadOnlyList<RoadSegment> SpawnSegments { get; }
+        IReadOnlyDictionary<VehicleId, RoadSegment> ExitSegments { get; }
+        RoadSegment GetSegment(int id);
+    }
+
     /// <summary>
     /// The complete road network graph for a level.
     /// Built from NetworkLayoutData and provides lookup for CrossRoads and segments.
     /// </summary>
-    public class RoadNetwork
+    public class RoadNetwork : IReadOnlyRoadNetwork
     {
         private readonly Dictionary<int, CrossRoads> _crossRoads = new Dictionary<int, CrossRoads>();
         private readonly Dictionary<int, RoadSegment> _segments = new Dictionary<int, RoadSegment>();
@@ -20,6 +29,11 @@ namespace GridLock.Simulation
         public Dictionary<int, RoadSegment> Segments => _segments;
         public List<RoadSegment> SpawnSegments => _spawnSegments;
         public Dictionary<VehicleId, RoadSegment> ExitSegments => _exitSegments;
+
+        IReadOnlyDictionary<int, CrossRoads> IReadOnlyRoadNetwork.CrossRoads => _crossRoads;
+        IReadOnlyDictionary<int, RoadSegment> IReadOnlyRoadNetwork.Segments => _segments;
+        IReadOnlyList<RoadSegment> IReadOnlyRoadNetwork.SpawnSegments => _spawnSegments;
+        IReadOnlyDictionary<VehicleId, RoadSegment> IReadOnlyRoadNetwork.ExitSegments => _exitSegments;
 
         public void Build(NetworkLayoutData networkLayoutData)
         {

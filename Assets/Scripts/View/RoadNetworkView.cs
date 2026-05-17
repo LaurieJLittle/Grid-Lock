@@ -21,7 +21,7 @@ namespace GridLock.View
             _roadSegmentViews = segments;
         }
 
-        public void Init(RoadNetwork network)
+        public void Init(IReadOnlyRoadNetwork network)
         {
             foreach (var crossRoadView in _crossRoadsViews)
             {

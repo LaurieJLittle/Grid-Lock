@@ -3,7 +3,12 @@ using GridLock.Core;
 
 namespace GridLock.Simulation
 {
-    public class RouteProvider
+    public interface IRouteProvider
+    {
+        List<RouteStep> FindRoute(RoadSegment startSegment, RoadSegment targetExit);
+    }
+
+    public class RouteProvider : IRouteProvider
     {
         public List<RouteStep> FindRoute(RoadSegment startSegment, RoadSegment targetExit)
         {

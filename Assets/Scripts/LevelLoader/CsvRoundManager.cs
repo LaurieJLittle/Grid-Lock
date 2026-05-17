@@ -30,7 +30,7 @@ namespace GridLock.LevelLoader
         {
             BuildNetworkFromCsv();
             _simulationManager = new SimulationManager(_crossRoadsPrioritization);
-            _spawnManager = new SpawnManager(_network, _vehicleMovementConfig);
+            _spawnManager = new SpawnManager(_network, _vehicleMovementConfig, new RouteProvider());
             _spawnManager.OnVehicleReadyToSpawn += _simulationManager.AddVehicle;
             _roundViewManager.Init(_simulationManager, _spawnManager, _network, _levelData.TimeLimit);
         }

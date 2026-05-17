@@ -13,7 +13,7 @@ namespace GridLock.View
         private readonly Queue<VehicleView> _previewVehicles = new Queue<VehicleView>();
         private RoundViewManager _roundViewManager;
 
-        public void Init(RoadNetwork network, SpawnManager spawnManager, RoundViewManager roundViewManager)
+        public void Init(IReadOnlyRoadNetwork network, SpawnManager spawnManager, RoundViewManager roundViewManager)
         {
             _roundViewManager = roundViewManager;
 

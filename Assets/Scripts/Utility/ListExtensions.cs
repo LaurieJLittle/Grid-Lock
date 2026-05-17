@@ -21,6 +21,8 @@ namespace GridLock.Utility
         }
         
         public static T RandomItem<T>(this List<T> list) => list[Random.Range(0, list.Count)];
+
+        public static T RandomItem<T>(this IReadOnlyList<T> list) => list[Random.Range(0, list.Count)];
         
         public static string EnumerableToString(this IEnumerable enumerable)
         {
