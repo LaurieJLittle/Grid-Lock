@@ -17,7 +17,7 @@ namespace GridLock.Simulation
         private float _nextSpawnCountdown;
         private RoadSegment _lastSpawnSegment;
 
-        public event Action<Vehicle, RoadSegment> OnVehicleReadyToSpawn;
+        public event Action<Vehicle, RoadSegment, VehicleConfig> OnVehicleReadyToSpawn;
         public event Action<RoadSegment> OnSpawnFailed;
 
         public SpawnManager(IReadOnlyRoadNetwork network, VehicleMovementConfig movementConfig, IRouteProvider routeProvider)
@@ -96,7 +96,7 @@ namespace GridLock.Simulation
             }
 
             var vehicle = new Vehicle(route, pendingSpawn.VehicleConfig, _movementConfig);
-            OnVehicleReadyToSpawn?.Invoke(vehicle, pendingSpawn.SpawnSegment);
+            OnVehicleReadyToSpawn?.Invoke(vehicle, pendingSpawn.SpawnSegment, pendingSpawn.VehicleConfig);
         }
 
         private RoadSegment GetNextSpawnSegment()

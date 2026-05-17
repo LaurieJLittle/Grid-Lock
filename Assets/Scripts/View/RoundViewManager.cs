@@ -20,7 +20,6 @@ namespace GridLock.View
         {
             _mainCamera = Camera.main;
             _roadNetworkView.Init(network);
-            simulationManager.OnVehicleSpawned += _vehicleViewFactory.ActivatePreview;
             _scoreUI.SetData(simulationManager);
             _timerUI.SetData(timeLimit);
             _vehicleViewFactory.Init(network, spawnManager, this);

@@ -10,7 +10,7 @@ namespace GridLock.View
         [SerializeField] private VehicleView _vehicleViewPrefab;
         [SerializeField] private RoadNetworkView _networkView;
 
-        private readonly Queue<VehicleView> _previewVehicles = new Queue<VehicleView>();
+        private readonly Queue<(VehicleView View, VehicleConfig Config)> _previewVehicles = new Queue<(VehicleView, VehicleConfig)>();
         private RoundViewManager _roundViewManager;
 
         public void Init(IReadOnlyRoadNetwork network, SpawnManager spawnManager, RoundViewManager roundViewManager)
@@ -22,20 +22,21 @@ namespace GridLock.View
                 segment.OnSpawnPending += (time, config) => CreatePreview(config, segment);
             }
 
+            spawnManager.OnVehicleReadyToSpawn += OnVehicleReadyToSpawn;
             spawnManager.OnSpawnFailed += HandleSpawnFailed;
         }
 
-        public void ActivatePreview(Vehicle vehicle)
+        private void OnVehicleReadyToSpawn(Vehicle vehicle, RoadSegment segment, VehicleConfig config)
         {
             if (_previewVehicles.Count > 0)
             {
-                VehicleView preview = _previewVehicles.Dequeue();
-                preview.ActivateFromPreview(vehicle, _networkView, _roundViewManager);
+                var preview = _previewVehicles.Dequeue();
+                preview.View.ActivateFromPreview(vehicle, preview.Config, _networkView, _roundViewManager);
             }
             else
             {
                 VehicleView vehicleView = Instantiate(_vehicleViewPrefab);
-                vehicleView.SetData(vehicle, _networkView, _roundViewManager);
+                vehicleView.SetData(vehicle, config, _networkView, _roundViewManager);
             }
         }
 
@@ -47,15 +48,15 @@ namespace GridLock.View
 
             VehicleView preview = Instantiate(_vehicleViewPrefab);
             preview.SetPreviewData(config, position, dir);
-            _previewVehicles.Enqueue(preview);
+            _previewVehicles.Enqueue((preview, config));
         }
 
         private void HandleSpawnFailed(RoadSegment segment)
         {
             if (_previewVehicles.Count > 0)
             {
-                VehicleView preview = _previewVehicles.Dequeue();
-                preview.ShowSpawnFailed();
+                var preview = _previewVehicles.Dequeue();
+                preview.View.ShowSpawnFailed();
             }
         }
     }

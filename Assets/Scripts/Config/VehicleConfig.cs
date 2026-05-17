@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GridLock.Config
 {
     [CreateAssetMenu(fileName = "VehicleConfig", menuName = "Scriptable Objects/Vehicle Config")]
-    public class VehicleConfig : ScriptableObject
+    public class VehicleConfig : ScriptableObject, IVehicleConfig
     {
         [Header("Simulation Fields")] // needed for simulation (may also be used in visual layer as well)
         [SerializeField] private VehicleId _id;

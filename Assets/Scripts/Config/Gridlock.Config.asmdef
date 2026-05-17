@@ -1,0 +1,16 @@
+{
+    "name": "Gridlock.Config",
+    "rootNamespace": "",
+    "references": [
+        "GUID:54f112a89f75e844a992977bd88892fc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

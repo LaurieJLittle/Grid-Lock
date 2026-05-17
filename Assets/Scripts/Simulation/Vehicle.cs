@@ -10,8 +10,8 @@ namespace GridLock.Simulation
         private static int _nextId;
         private readonly List<RouteStep> _route;
 
-        public VehicleConfig VehicleConfig { get; }
-        public VehicleMovementConfig MovementConfig { get; }
+        public IVehicleConfig VehicleConfig { get; }
+        public IVehicleMovementConfig MovementConfig { get; }
         public int Id { get; }
         public VehicleState State { get; private set; }
         private int CurrentRouteIndex { get; set; }
@@ -26,7 +26,7 @@ namespace GridLock.Simulation
         public event Action<Vehicle, VehicleState> OnStateChanged;
         public event Action TripComplete;
 
-        public Vehicle(List<RouteStep> route, VehicleConfig vehicleConfig, VehicleMovementConfig movementConfig)
+        public Vehicle(List<RouteStep> route, IVehicleConfig vehicleConfig, IVehicleMovementConfig movementConfig)
         {
             Id = _nextId++;
             _route = route;

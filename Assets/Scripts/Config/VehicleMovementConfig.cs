@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GridLock.Config
 {
     [CreateAssetMenu(fileName = "VehicleMovementConfig", menuName = "Scriptable Objects/Vehicle Movement Config")]
-    public class VehicleMovementConfig : ScriptableObject
+    public class VehicleMovementConfig : ScriptableObject, IVehicleMovementConfig
     {
         [SerializeField] private float _leftTurnDistance = 3f;
         [SerializeField] private float _rightTurnDistance = 4.5f;

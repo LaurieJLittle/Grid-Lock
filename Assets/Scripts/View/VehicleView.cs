@@ -30,6 +30,7 @@ namespace GridLock.View
         [SerializeField] private float _indicatorForwardOffset = 0.3f;
 
         private Vehicle _vehicle;
+        private VehicleConfig _vehicleConfig;
         private RoadNetworkView _roadNetworkView;
         private RoundViewManager _roundViewManager;
         private Sprite[] _rotationSprites;
@@ -51,13 +52,14 @@ namespace GridLock.View
             _sinCameraElevation = Mathf.Sin(kCameraElevationDeg * Mathf.Deg2Rad);
         }
 
-        public void SetData(Vehicle targetVehicle, RoadNetworkView roadNetworkView, RoundViewManager roundViewManager)
+        public void SetData(Vehicle targetVehicle, VehicleConfig vehicleConfig, RoadNetworkView roadNetworkView, RoundViewManager roundViewManager)
         {
             _vehicle = targetVehicle;
+            _vehicleConfig = vehicleConfig;
             _vehicle.TripComplete += OnTripComplete;
             _roadNetworkView = roadNetworkView;
             _roundViewManager = roundViewManager;
-            _rotationSprites = _vehicle.VehicleConfig.RotationSprites;
+            _rotationSprites = _vehicleConfig.RotationSprites;
             _vehicle.OnStateChanged += OnVehicleStateChanged;
 
             OnVehicleStateChanged(_vehicle, _vehicle.State);
@@ -79,7 +81,7 @@ namespace GridLock.View
             _previewCoroutine = StartCoroutine(PulsePreview());
         }
 
-        public void ActivateFromPreview(Vehicle vehicle, RoadNetworkView roadNetworkView, RoundViewManager roundViewManager)
+        public void ActivateFromPreview(Vehicle vehicle, VehicleConfig vehicleConfig, RoadNetworkView roadNetworkView, RoundViewManager roundViewManager)
         {
             if (_previewCoroutine != null)
             {
@@ -88,7 +90,7 @@ namespace GridLock.View
             }
 
             _spriteRenderer.color = Color.white;
-            SetData(vehicle, roadNetworkView, roundViewManager);
+            SetData(vehicle, vehicleConfig, roadNetworkView, roundViewManager);
         }
 
         public void ShowSpawnFailed()
@@ -318,7 +320,7 @@ namespace GridLock.View
                 // offset vehicle by distance from front to centre of vehicle so front of vehicle reflects progress value not centre
                 // this means e.g, when stopping at a cross roads the front of the vehicle will be on the give way line, not the middle
                 Vector3 dir = _roadNetworkView.GetSegmentForwardDirection(_vehicle.CurrentSegment);
-                float offsetMagnitude = _vehicle.VehicleConfig.CentreToFrontDistance;
+                float offsetMagnitude = _vehicleConfig.CentreToFrontDistance;
                 startPosition -= dir * offsetMagnitude;
                 endPosition -= dir * offsetMagnitude;
                 
@@ -331,7 +333,7 @@ namespace GridLock.View
                 _roadNetworkView.GetCrossRoadsPathData(_vehicle, _vehicle.TraversingCrossRoads, out startPosition, out _bezierMidPoint, out endPosition, out Vector3 inboundDir, out Vector3 outboundDir);
                 
                 // offset vehicle by distance from front to centre of vehicle so front of vehicle reflects progress value not centre
-                float offsetMagnitude = _vehicle.VehicleConfig.CentreToFrontDistance;
+                float offsetMagnitude = _vehicleConfig.CentreToFrontDistance;
                 _crossRoadsStartOffset = -inboundDir * offsetMagnitude;
                 _crossRoadsEndOffset = -outboundDir * offsetMagnitude;
                 startPosition += _crossRoadsStartOffset;
