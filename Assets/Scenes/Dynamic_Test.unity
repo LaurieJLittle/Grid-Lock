@@ -1751,7 +1751,7 @@ MonoBehaviour:
   _crossRoadsWidth: 1.25
   _crossRoadsHeight: 0.9
   _roadCellWidth: 0.26666668
-  _roadCellHeight: 0.19
+  _roadCellHeight: 0.185
   _laneOffset: 0.12
 --- !u!1 &2133363663
 GameObject:

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SharedVehicleMovementConfig
   m_EditorClassIdentifier: Assembly-CSharp::GridLock.Config.VehicleMovementConfig
   _leftTurnDistance: 3
-  _rightTurnDistance: 4.5
-  _straightDistance: 3.75
+  _rightTurnDistance: 5
+  _straightDistance: 5
   _speed: 2

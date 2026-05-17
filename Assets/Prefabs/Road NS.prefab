@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 635762026800735411}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.132, y: 0.347, z: 0}
+  m_LocalPosition: {x: -0.12, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98,6 +98,7 @@ MonoBehaviour:
   _roadSegmentConfig: {fileID: 5160831489512022149}
   _roadStart: {fileID: 8773888974859476998}
   _roadEnd: {fileID: 5106219660802025634}
+  _overrideId: -2147483648
 --- !u!1 &5558831369741641796
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +217,7 @@ Transform:
   m_GameObject: {fileID: 5577343317197022568}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.121, y: -0.324, z: 0}
+  m_LocalPosition: {x: -0.12, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -289,6 +290,7 @@ MonoBehaviour:
   _roadSegmentConfig: {fileID: 1998007339292183336}
   _roadStart: {fileID: 7228355227994185589}
   _roadEnd: {fileID: 3828202993106996901}
+  _overrideId: -2147483648
 --- !u!1 &7273189792915694801
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 7273189792915694801}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.117, y: 0.36, z: 0}
+  m_LocalPosition: {x: 0.12, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -345,7 +347,7 @@ Transform:
   m_GameObject: {fileID: 9169201386520419803}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.119, y: -0.35, z: 0}
+  m_LocalPosition: {x: 0.12, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
