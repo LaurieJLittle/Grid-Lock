@@ -32,7 +32,7 @@ namespace GridLock.View
 
         private void Update()
         {
-            float colorVariation = 0.95f + (0.05f * Mathf.Cos(2f * Time.time));
+            float colorVariation = 0.9f + (0.1f * Mathf.Cos(2f * Time.time));
             _bg.color = new Color(colorVariation, colorVariation, colorVariation);
         }
 
