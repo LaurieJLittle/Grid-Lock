@@ -837,12 +837,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1486,11 +1486,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7c6d1fa3771bd4481b3e3a82afdd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridLock.LevelLoader.CsvRoundManager
-  _csvFile: {fileID: 4900000, guid: 6b5f96cf2bf4cff429b7aac70988cfb3, type: 3}
+  _roundViewManager: {fileID: 1010195306}
   _levelData: {fileID: 11400000, guid: ef9c002960352b64a8396fdee3b930d7, type: 2}
   _vehicleMovementConfig: {fileID: 11400000, guid: e27975a2819ddbc469cdb648c6a7278b, type: 2}
   _crossRoadsPrioritization: 0
-  _roundViewManager: {fileID: 1010195306}
+  _csvFile: {fileID: 4900000, guid: 6b5f96cf2bf4cff429b7aac70988cfb3, type: 3}
   _levelViewBuilder: {fileID: 2080176001}
   _roadNetworkView: {fileID: 2080176000}
   _cameraController: {fileID: 330585548}
