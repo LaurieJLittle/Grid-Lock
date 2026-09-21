@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GridLock.Config;
 using GridLock.Core;
 
 namespace GridLock.Simulation
@@ -106,7 +105,7 @@ namespace GridLock.Simulation
             OnStateChanged?.Invoke(this, newState);
         }
 
-        public void MarkExited(float time)
+        public void MarkExited()
         {
             SetState(VehicleState.ExitedNetwork);
             TripComplete.Invoke();

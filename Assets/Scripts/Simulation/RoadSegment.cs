@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GridLock.Config;
 using GridLock.Core;
-using UnityEngine;
 
 namespace GridLock.Simulation
 {
@@ -19,7 +17,7 @@ namespace GridLock.Simulation
         public CrossRoads ToCrossRoads { get; set; }
         private int FreeUnits => Capacity - _occupiedUnits - _reservedUnits;
 
-        public event Action<float, VehicleConfig> OnSpawnPending;
+        public event Action<float, IVehicleConfig> OnSpawnPending;
 
         public RoadSegment(int id, int capacity, Direction direction)
         {
@@ -28,7 +26,7 @@ namespace GridLock.Simulation
             Direction = direction;
         }
 
-        public void MarkSpawnPending(float timeTillSpawn, VehicleConfig vehicleConfig)
+        public void MarkSpawnPending(float timeTillSpawn, IVehicleConfig vehicleConfig)
         {
             OnSpawnPending?.Invoke(timeTillSpawn, vehicleConfig);
         }
@@ -68,7 +66,7 @@ namespace GridLock.Simulation
 
             if (!HasSpace(vehicle.VehicleConfig.Size))
             {
-                Debug.LogError("Error: Adding vehicle to road Segment but no space available!");
+                throw new InvalidOperationException("Adding vehicle to road segment but no space available!");
             }
 
             _vehicles.Add(vehicle);

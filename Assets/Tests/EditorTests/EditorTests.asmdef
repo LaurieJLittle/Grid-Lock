@@ -4,7 +4,6 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Gridlock.Config",
         "Core",
         "Gridlock.Simulation"
     ],

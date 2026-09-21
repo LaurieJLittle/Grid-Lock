@@ -44,6 +44,11 @@ ExportedObj/
 *.csproj
 *.unityproj
 *.sln
+# Keep the pure C# test project files (exclude from the above globs)
+!/Tests/*.csproj
+!/Tests/*.sln
+/Tests/bin/
+/Tests/obj/
 *.suo
 *.tmp
 *.user

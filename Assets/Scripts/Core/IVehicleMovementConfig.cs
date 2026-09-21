@@ -1,4 +1,4 @@
-namespace GridLock.Config
+namespace GridLock.Core
 {
     public interface IVehicleMovementConfig
     {

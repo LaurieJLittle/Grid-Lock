@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using GridLock.Core;
-using UnityEngine;
 
 namespace GridLock.Simulation
 {
@@ -44,8 +44,7 @@ namespace GridLock.Simulation
             RoadSegment exitRoad = GetExitRoad(approachFrom, turn);
             if (exitRoad == null)
             {
-                Debug.LogError($"Car trying to exit crossroads {Id} in invalid direction");
-                return false;
+                throw new InvalidOperationException($"Car trying to exit crossroads {Id} in invalid direction");
             }
 
             return true;
@@ -91,8 +90,7 @@ namespace GridLock.Simulation
                     return approachFrom == Direction.East || approachFrom == Direction.West;
             }
 
-            Debug.LogError($"Error checking if traffic can enter crossroads, not handling Traffic light state {CurrentLight}");
-            return false;
+            throw new InvalidOperationException($"Error checking if traffic can enter crossroads, not handling Traffic light state {CurrentLight}");
         }
 
         private RoadSegment GetExitRoad(Direction approachFrom, TurnDirection turn)

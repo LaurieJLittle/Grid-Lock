@@ -20,9 +20,4 @@ namespace GridLock.Config
         }
     }
 
-    public struct CrossRoadsData
-    {
-        public int Id;
-        public TrafficLightState InitialTrafficLightState;
-    }
 }

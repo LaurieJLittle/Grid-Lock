@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using GridLock.Core;
-using UnityEngine;
 
 namespace GridLock.Simulation
 {
@@ -14,7 +13,7 @@ namespace GridLock.Simulation
         private readonly CrossRoadsPrioritization _crossRoadsPrioritization;
         private readonly HashSet<int> _processedRequestIds = new HashSet<int>();
         private float _spawnTimer;
-        
+
         public event Action<Vehicle> OnVehicleSpawned;
         public event Action<Vehicle> OnVehicleDestroyed;
 
@@ -27,16 +26,15 @@ namespace GridLock.Simulation
         {
             if (!startSegment.HasSpace(vehicle.VehicleConfig.Size))
             {
-                Debug.LogWarning($"Cannot spawn vehicle {vehicle.Id}: no space on segment {startSegment.Id}");
                 return;
             }
-            
+
             startSegment.AddVehicle(vehicle);
             vehicle.SetSegment(startSegment);
             _activeVehicles.Add(vehicle);
             OnVehicleSpawned?.Invoke(vehicle);
         }
-        
+
         public void UpdateSimulation(float dt)
         {
             ProcessCrossRoadsTraversals(dt);
@@ -55,7 +53,7 @@ namespace GridLock.Simulation
                 }
 
                 float progressDelta = (vehicle.MovementConfig.Speed * dt) / vehicle.CurrentDistance;
-                vehicle.Progress = Mathf.Min(vehicle.Progress + progressDelta, 1f);
+                vehicle.Progress = Math.Min(vehicle.Progress + progressDelta, 1f);
 
                 if (vehicle.Progress >= 1f)
                 {
@@ -77,12 +75,12 @@ namespace GridLock.Simulation
                 {
                     continue;
                 }
-                
+
                 // Advance along road segment
                 float progressDelta = (vehicle.MovementConfig.Speed * dt) / vehicle.CurrentDistance;
 
                 float maxProgress = vehicle.CurrentSegment.GetMaxVehicleProgress(vehicle);
-                vehicle.Progress = Mathf.Min(vehicle.Progress + progressDelta, maxProgress);
+                vehicle.Progress = Math.Min(vehicle.Progress + progressDelta, maxProgress);
 
                 // Try enter crossroads at end of roadSegment
                 if (vehicle.Progress >= 1f)
@@ -111,7 +109,7 @@ namespace GridLock.Simulation
                 _pendingEntries.Add(crossRoads.Id, new Dictionary<int, CrossRoadsEntryRequest>());
                 _pendingEntryIds.Add(crossRoads.Id, new List<int>());
             }
-            
+
             if (!_pendingEntries[crossRoads.Id].ContainsKey(vehicle.Id))
             {
                 _pendingEntries[crossRoads.Id].Add(vehicle.Id, new CrossRoadsEntryRequest
@@ -122,7 +120,7 @@ namespace GridLock.Simulation
                     Turn = nextStep.Turn,
                     ExitDir = nextStep.ExitDirection,
                 });
-                
+
                 _pendingEntryIds[crossRoads.Id].Add(vehicle.Id);
             }
 
@@ -204,10 +202,10 @@ namespace GridLock.Simulation
         private void DespawnVehicle(Vehicle vehicle)
         {
             vehicle.CurrentSegment?.RemoveVehicle(vehicle);
-            vehicle.MarkExited(Time.time);
+            vehicle.MarkExited();
             _vehiclesToRemove.Add(vehicle);
         }
-        
+
         private void CleanupExitedVehicles()
         {
             foreach (var vehicle in _vehiclesToRemove)

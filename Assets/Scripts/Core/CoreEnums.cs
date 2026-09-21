@@ -35,4 +35,17 @@ namespace GridLock.Core
         TraversingCrossRoads,
         ExitedNetwork
     }
+
+    public enum VehicleId
+    {
+        BlueCar,
+        RedCar,
+        GreenCar,
+        OrangeCar,
+        PurpleCar,
+        TealCar,
+        WhiteCar,
+        YellowCar,
+        Bus,
+    }
 }

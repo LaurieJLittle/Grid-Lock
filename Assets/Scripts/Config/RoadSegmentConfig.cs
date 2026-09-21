@@ -26,12 +26,4 @@ namespace GridLock.Config
         }
     }
 
-    public struct RoadSegmentData
-    {
-        public int Id;
-        public int FromCrossRoadsId;
-        public int ToCrossRoadsId;
-        public Direction Direction;
-        public int Capacity;
-    }
 }

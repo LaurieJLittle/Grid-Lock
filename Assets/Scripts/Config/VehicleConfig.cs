@@ -1,3 +1,4 @@
+using GridLock.Core;
 using UnityEngine;
 
 namespace GridLock.Config
@@ -17,18 +18,5 @@ namespace GridLock.Config
         public int Size => _size;
         public float CentreToFrontDistance => _centreToFrontDistance; // used in vehicle view to calculate offset needed so car stops infront of line at crossroads
         public Sprite[] RotationSprites => _rotationSprites;
-    }
-    
-    public enum VehicleId
-    {
-        BlueCar,
-        RedCar,
-        GreenCar,
-        OrangeCar,
-        PurpleCar,
-        TealCar,
-        WhiteCar,
-        YellowCar,
-        Bus,
     }
 }

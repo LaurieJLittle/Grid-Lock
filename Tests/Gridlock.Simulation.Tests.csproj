@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.14.*" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Source files (linked, not copied) -->
+    <Compile Include="../Assets/Scripts/Core/**/*.cs" LinkBase="Core" Exclude="../Assets/Scripts/Core/*.asmdef" />
+    <Compile Include="../Assets/Scripts/Simulation/**/*.cs" LinkBase="Simulation" Exclude="../Assets/Scripts/Simulation/*.asmdef" />
+    <!-- Test files (linked from Unity test folder) -->
+    <Compile Include="../Assets/Tests/EditorTests/**/*.cs" LinkBase="Tests" Exclude="../Assets/Tests/EditorTests/*.asmdef" />
+  </ItemGroup>
+</Project>

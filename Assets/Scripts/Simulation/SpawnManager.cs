@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GridLock.Config;
-using GridLock.Utility;
-using UnityEngine;
+using GridLock.Core;
 
 namespace GridLock.Simulation
 {
@@ -11,16 +9,16 @@ namespace GridLock.Simulation
         private const float kSpawnHeadsUp = 1f;
 
         private readonly IReadOnlyRoadNetwork _network;
-        private readonly VehicleMovementConfig _movementConfig;
+        private readonly IVehicleMovementConfig _movementConfig;
         private readonly IRouteProvider _routeProvider;
         private readonly Queue<PendingSpawn> _pendingSpawns = new Queue<PendingSpawn>();
         private float _nextSpawnCountdown;
         private RoadSegment _lastSpawnSegment;
 
-        public event Action<Vehicle, RoadSegment, VehicleConfig> OnVehicleReadyToSpawn;
+        public event Action<Vehicle, RoadSegment, IVehicleConfig> OnVehicleReadyToSpawn;
         public event Action<RoadSegment> OnSpawnFailed;
 
-        public SpawnManager(IReadOnlyRoadNetwork network, VehicleMovementConfig movementConfig, IRouteProvider routeProvider)
+        public SpawnManager(IReadOnlyRoadNetwork network, IVehicleMovementConfig movementConfig, IRouteProvider routeProvider)
         {
             _network = network;
             _movementConfig = movementConfig;
@@ -46,12 +44,11 @@ namespace GridLock.Simulation
                 }
             }
         }
-        
-        public void QueueSpawn(VehicleConfig vehicleConfig)
+
+        public void QueueSpawn(IVehicleConfig vehicleConfig)
         {
             if (_network.SpawnSegments.Count == 0)
             {
-                Debug.LogWarning("Can't spawn vehicle, no spawn points found");
                 return;
             }
 
@@ -67,30 +64,26 @@ namespace GridLock.Simulation
                 _nextSpawnCountdown = kSpawnHeadsUp;
             }
         }
-        
+
         private void SpawnVehicle(PendingSpawn pendingSpawn)
         {
             // if there is no space on the road segment, just don't spawn, creates
             // a mechanism where player maximises score by keeping as many of the
-            // spawn road segments clear for as much of the playtime as possible 
+            // spawn road segments clear for as much of the playtime as possible
             if (!pendingSpawn.SpawnSegment.HasSpace(pendingSpawn.VehicleConfig.Size))
             {
-                Debug.Log("Spawn segment doesn't have space available");
                 OnSpawnFailed?.Invoke(pendingSpawn.SpawnSegment);
                 return;
             }
 
             if (!_network.ExitSegments.TryGetValue(pendingSpawn.VehicleConfig.Id, out var exitSegment))
             {
-                Debug.LogError($"No exit configured for vehicle type {pendingSpawn.VehicleConfig.Id}");
-                OnSpawnFailed?.Invoke(pendingSpawn.SpawnSegment);
-                return;
+                throw new InvalidOperationException($"No exit configured for vehicle type {pendingSpawn.VehicleConfig.Id}");
             }
 
             List<RouteStep> route = _routeProvider.FindRoute(pendingSpawn.SpawnSegment, exitSegment);
             if (route == null || route.Count == 0)
             {
-                Debug.LogWarning($"No valid route from segment {pendingSpawn.SpawnSegment.Id}");
                 OnSpawnFailed?.Invoke(pendingSpawn.SpawnSegment);
                 return;
             }
@@ -118,10 +111,10 @@ namespace GridLock.Simulation
 
         private class PendingSpawn
         {
-            public readonly VehicleConfig VehicleConfig;
+            public readonly IVehicleConfig VehicleConfig;
             public readonly RoadSegment SpawnSegment;
 
-            public PendingSpawn(VehicleConfig vehicleConfig, RoadSegment spawnSegment)
+            public PendingSpawn(IVehicleConfig vehicleConfig, RoadSegment spawnSegment)
             {
                 VehicleConfig = vehicleConfig;
                 SpawnSegment = spawnSegment;

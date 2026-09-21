@@ -1,5 +1,5 @@
+using System;
 using GridLock.Core;
-using UnityEngine;
 
 namespace GridLock.Simulation
 {
@@ -12,8 +12,7 @@ namespace GridLock.Simulation
             if (dir == Direction.East) return Direction.West;
             if (dir == Direction.West) return Direction.East;
 
-            Debug.LogError("couldn't find opposite direction");
-            return Direction.None;
+            throw new ArgumentException($"Cannot find opposite of direction {dir}");
         }
 
         public static TurnDirection DeduceTurn(Direction approachFrom, Direction exitToward)
@@ -29,26 +28,25 @@ namespace GridLock.Simulation
             {
                 return TurnDirection.Left;
             }
-            
+
             Direction right =  ResolveExitDirection(approachFrom, TurnDirection.Right);
             if (exitToward == right)
             {
                 return TurnDirection.Right;
             }
-            
-            Debug.LogError($"Error determining turn direction - approachFrom {approachFrom}  exitToward {exitToward}");
-            return TurnDirection.Right;
+
+            throw new ArgumentException($"Error determining turn direction - approachFrom {approachFrom} exitToward {exitToward}");
         }
-        
+
         public static Direction ResolveExitDirection(Direction approachFrom, TurnDirection turn)
         {
             switch (approachFrom, turn)
             {
                 case (Direction.South, TurnDirection.Straight):
-                case (Direction.East, TurnDirection.Right): 
+                case (Direction.East, TurnDirection.Right):
                 case (Direction.West, TurnDirection.Left):
                     return Direction.North;
-                case (Direction.South, TurnDirection.Right): 
+                case (Direction.South, TurnDirection.Right):
                 case (Direction.North, TurnDirection.Left):
                 case (Direction.West, TurnDirection.Straight):
                     return Direction.East;
@@ -62,10 +60,9 @@ namespace GridLock.Simulation
                     return Direction.West;
             }
 
-            Debug.LogError("Could not resolve exit direction");
-            return Direction.None;
+            throw new ArgumentException($"Could not resolve exit direction for approach {approachFrom}, turn {turn}");
         }
-        
+
         public static bool AreTurnsConflicting(Direction approachA, TurnDirection turnA, Direction approachB, TurnDirection turnB)
         {
             // Same approach direction — sequential, not conflicting at the crossroads level

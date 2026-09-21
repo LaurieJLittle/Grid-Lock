@@ -2,9 +2,7 @@
     "name": "Gridlock.Simulation",
     "rootNamespace": "",
     "references": [
-        "GUID:54f112a89f75e844a992977bd88892fc",
-        "GUID:8544ec030f6d7fb4e8ea2195b6ae89f0",
-        "GUID:91a24046731b3bb4c8f54f178df73f95"
+        "GUID:54f112a89f75e844a992977bd88892fc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -14,5 +12,5 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false
+    "noEngineReferences": true
 }

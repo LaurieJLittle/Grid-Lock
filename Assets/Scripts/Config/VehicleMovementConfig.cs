@@ -1,3 +1,4 @@
+using GridLock.Core;
 using UnityEngine;
 
 namespace GridLock.Config

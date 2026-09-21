@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GridLock.Config;
 using GridLock.Core;
 
 namespace GridLock.Simulation

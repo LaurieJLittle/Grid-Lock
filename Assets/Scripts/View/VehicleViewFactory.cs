@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GridLock.Config;
+using GridLock.Core;
 using GridLock.Simulation;
 using UnityEngine;
 
@@ -19,14 +20,14 @@ namespace GridLock.View
 
             foreach (var segment in network.SpawnSegments)
             {
-                segment.OnSpawnPending += (time, config) => CreatePreview(config, segment);
+                segment.OnSpawnPending += (time, config) => CreatePreview((VehicleConfig)config, segment);
             }
 
             spawnManager.OnVehicleReadyToSpawn += OnVehicleReadyToSpawn;
             spawnManager.OnSpawnFailed += HandleSpawnFailed;
         }
 
-        private void OnVehicleReadyToSpawn(Vehicle vehicle, RoadSegment segment, VehicleConfig config)
+        private void OnVehicleReadyToSpawn(Vehicle vehicle, RoadSegment segment, IVehicleConfig config)
         {
             if (_previewVehicles.Count > 0)
             {
@@ -36,7 +37,7 @@ namespace GridLock.View
             else
             {
                 VehicleView vehicleView = Instantiate(_vehicleViewPrefab);
-                vehicleView.SetData(vehicle, config, _networkView, _roundViewManager);
+                vehicleView.SetData(vehicle, (VehicleConfig)config, _networkView, _roundViewManager);
             }
         }
 
