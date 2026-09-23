@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Core",
-        "Gridlock.Simulation"
+        "Gridlock.Simulation",
+        "Gridlock.LevelLoader"
     ],
     "includePlatforms": [
         "Editor"

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GridLock.Core;
 using GridLock.View;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ namespace GridLock.LevelLoader
             foreach (var kvp in buildData.CrossRoadsPositions)
             {
                 int id = kvp.Key;
-                Vector2Int pos = kvp.Value;
+                Int2 pos = kvp.Value;
                 Vector3 worldPos = GridToWorld(pos);
 
                 CrossRoadView view = Instantiate(_crossRoadsPrefab, worldPos, Quaternion.identity, transform);
@@ -148,7 +149,7 @@ namespace GridLock.LevelLoader
             return false;
         }
 
-        private Vector3 GetCellEdge(Vector2Int pos, Vector3 otherCenter, CellType[,] cellTypes)
+        private Vector3 GetCellEdge(Int2 pos, Vector3 otherCenter, CellType[,] cellTypes)
         {
             Vector3 center = GridToWorld(pos);
             float halfW = _colWidths[pos.x] * 0.5f;
@@ -164,7 +165,7 @@ namespace GridLock.LevelLoader
             return center + new Vector3(offsetX, offsetY, 0f);
         }
 
-        private Vector3 GridToWorld(Vector2Int pos)
+        private Vector3 GridToWorld(Int2 pos)
         {
             return new Vector3(_colPositions[pos.x], _rowPositions[pos.y], 0f);
         }

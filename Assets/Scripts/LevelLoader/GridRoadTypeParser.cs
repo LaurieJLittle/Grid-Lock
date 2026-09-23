@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEngine;
+using GridLock.Core;
 
 namespace GridLock.LevelLoader
 {
@@ -13,15 +13,15 @@ namespace GridLock.LevelLoader
     public class GridAnalysisResult
     {
         public CellType[,] CellTypes;
-        public List<Vector2Int> CrossRoadsCells = new List<Vector2Int>();
-        public List<Vector2Int> SpawnCells = new List<Vector2Int>();
-        public List<Vector2Int> ExitCells = new List<Vector2Int>();
+        public List<Int2> CrossRoadsCells = new List<Int2>();
+        public List<Int2> SpawnCells = new List<Int2>();
+        public List<Int2> ExitCells = new List<Int2>();
     }
 
     public static class GridRoadTypeParser
     {
-        private static readonly Vector2Int[] kNeighbouringCells =
-            { Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down };
+        private static readonly Int2[] kNeighbouringCells =
+            { new Int2(-1, 0), new Int2(1, 0), new Int2(0, -1), new Int2(0, 1) };
         
         /// <summary>
         /// Translates grid array values into a Result class that maps all the different road type positions (not in real space still)
@@ -61,7 +61,7 @@ namespace GridLock.LevelLoader
                     if (value == 1 && neighborCount >= 3)
                     {
                         result.CellTypes[x, y] = CellType.CrossRoads;
-                        result.CrossRoadsCells.Add(new Vector2Int(x, y));
+                        result.CrossRoadsCells.Add(new Int2(x, y));
                     }
                     else
                     {
@@ -70,12 +70,12 @@ namespace GridLock.LevelLoader
 
                     if (value == 2 || value == 4)
                     {
-                        result.SpawnCells.Add(new Vector2Int(x, y));
+                        result.SpawnCells.Add(new Int2(x, y));
                     }
 
                     if (value == 3 || value == 4)
                     {
-                        result.ExitCells.Add(new Vector2Int(x, y));
+                        result.ExitCells.Add(new Int2(x, y));
                     }
                 }
             }

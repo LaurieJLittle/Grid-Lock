@@ -1,8 +1,7 @@
+using System;
 using System.Collections.Generic;
-using GridLock.Config;
 using GridLock.Core;
 using GridLock.Simulation;
-using UnityEngine;
 
 namespace GridLock.LevelLoader
 {
@@ -11,7 +10,7 @@ namespace GridLock.LevelLoader
         public NetworkLayoutData LayoutData = new NetworkLayoutData();
         public List<int> SpawnSegmentIds = new List<int>();
         public List<int> ExitSegmentIds = new List<int>();
-        public Dictionary<int, Vector2Int> CrossRoadsPositions = new Dictionary<int, Vector2Int>();
+        public Dictionary<int, Int2> CrossRoadsPositions = new Dictionary<int, Int2>();
         public List<ConnectionPair> ConnectionPairs = new List<ConnectionPair>();
     }
 
@@ -19,8 +18,8 @@ namespace GridLock.LevelLoader
     {
         public int ForwardSegmentId;
         public int ReverseSegmentId;
-        public Vector2Int FromPos;
-        public Vector2Int ToPos;
+        public Int2 FromPos;
+        public Int2 ToPos;
         public bool IsNorthSouth;
     }
 
@@ -99,12 +98,12 @@ namespace GridLock.LevelLoader
                     // Adjacent crossroads without road cells between them is not supported
                     if (analysis.CellTypes[startCol, startRow] == CellType.CrossRoads)
                     {
-                        Debug.LogWarning($"Adjacent crossroads at ({crossRoadsPos.x},{crossRoadsPos.y}) and ({startCol},{startRow}) with no road cells between them");
-                        continue;
+                        throw new InvalidOperationException(
+                            $"Adjacent crossroads at ({crossRoadsPos.x},{crossRoadsPos.y}) and ({startCol},{startRow}) with no road cells between them");
                     }
 
                     // Walk along road cells in this direction
-                    var roadCells = new List<Vector2Int>();
+                    var roadCells = new List<Int2>();
                     bool hasSpawn = false;
                     bool hasExit = false;
                     int curRow = startRow;
@@ -113,7 +112,7 @@ namespace GridLock.LevelLoader
                     while (IsInBounds(curCol, curRow, colCount, rowCount)
                            && analysis.CellTypes[curCol, curRow] == CellType.Road)
                     {
-                        roadCells.Add(new Vector2Int(curCol, curRow));
+                        roadCells.Add(new Int2(curCol, curRow));
                         if (spawnCellSet.Contains((curCol, curRow)))
                         {
                             hasSpawn = true;
@@ -140,7 +139,7 @@ namespace GridLock.LevelLoader
                         CreateCrossRoadsPairIfNew(
                             result, processedConnections, ref nextSegmentId,
                             crossRoadsId, otherCrossRoadsId,
-                            crossRoadsPos, new Vector2Int(curCol, curRow),
+                            crossRoadsPos, new Int2(curCol, curRow),
                             roadCells.Count, direction,
                             hasSpawn, hasExit);
                     }
@@ -164,13 +163,13 @@ namespace GridLock.LevelLoader
             HashSet<(int, int)> processedConnections,
             ref int nextSegmentId,
             int crossRoadsIdA, int crossRoadsIdB,
-            Vector2Int posA, Vector2Int posB,
+            Int2 posA, Int2 posB,
             int roadCellCount, Direction dirAtoB,
             bool hasSpawn, bool hasExit)
         {
             // Use sorted pair to avoid processing the same connection twice
-            int minId = Mathf.Min(crossRoadsIdA, crossRoadsIdB);
-            int maxId = Mathf.Max(crossRoadsIdA, crossRoadsIdB);
+            int minId = Math.Min(crossRoadsIdA, crossRoadsIdB);
+            int maxId = Math.Max(crossRoadsIdA, crossRoadsIdB);
             if (processedConnections.Contains((minId, maxId)))
             {
                 return;
@@ -178,7 +177,7 @@ namespace GridLock.LevelLoader
             processedConnections.Add((minId, maxId));
 
             Direction dirBtoA = GetOpposite(dirAtoB);
-            int capacity = Mathf.Max(1, roadCellCount);
+            int capacity = Math.Max(1, roadCellCount);
 
             // Segment from A to B (forward)
             int segIdAtoB = nextSegmentId++;
@@ -228,14 +227,14 @@ namespace GridLock.LevelLoader
         private static void CreateEdgeSegments(
             CsvNetworkBuildData result,
             ref int nextSegmentId,
-            int crossRoadsId, Vector2Int crossRoadsPos,
-            List<Vector2Int> roadCells, Direction dirFromCrossRoads,
+            int crossRoadsId, Int2 crossRoadsPos,
+            List<Int2> roadCells, Direction dirFromCrossRoads,
             bool hasSpawn, bool hasExit)
         {
-            int capacity = Mathf.Max(1, roadCells.Count);
+            int capacity = Math.Max(1, roadCells.Count);
             Direction dirToCrossRoads = GetOpposite(dirFromCrossRoads);
 
-            Vector2Int edgePos = roadCells[roadCells.Count - 1];
+            Int2 edgePos = roadCells[roadCells.Count - 1];
 
             // Outbound: from crossroads toward edge (ToCrossRoads = null via -1)
             int outboundId = nextSegmentId++;

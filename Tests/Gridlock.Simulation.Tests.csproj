@@ -11,6 +11,7 @@
     <!-- Source files (linked, not copied) -->
     <Compile Include="../Assets/Scripts/Core/**/*.cs" LinkBase="Core" Exclude="../Assets/Scripts/Core/*.asmdef" />
     <Compile Include="../Assets/Scripts/Simulation/**/*.cs" LinkBase="Simulation" Exclude="../Assets/Scripts/Simulation/*.asmdef" />
+    <Compile Include="../Assets/Scripts/LevelLoader/**/*.cs" LinkBase="LevelLoader" Exclude="../Assets/Scripts/LevelLoader/*.asmdef;../Assets/Scripts/LevelLoader/LevelViewBuilder.cs;../Assets/Scripts/LevelLoader/CsvRoundManager.cs" />
     <!-- Test files (linked from Unity test folder) -->
     <Compile Include="../Assets/Tests/EditorTests/**/*.cs" LinkBase="Tests" Exclude="../Assets/Tests/EditorTests/*.asmdef" />
   </ItemGroup>
